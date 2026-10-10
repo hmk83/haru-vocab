@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T11:35:57.676Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T11:36:58.573Z",
   "checks": [
     "Sky dropdown, history/settings links, logo returns to default vocabulary",
     "Neutral buttons including hover, brand and cancel",
