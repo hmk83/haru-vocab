@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T11:24:34.620Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T11:25:46.302Z",
   "checks": [
     "Compact fixed bottom study menu",
     "flash en language, compact controls and modal",
