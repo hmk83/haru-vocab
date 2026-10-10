@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T11:31:41.239Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T11:32:49.702Z",
   "checks": [
     "New brand and button-style cancel",
     "Shuffled full study, score-based encouragement and automatic history",
