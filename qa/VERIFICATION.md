@@ -90,3 +90,6 @@ https://hmk83.github.io/haru-vocab/ 에서 동일한 17개 하네스 전부 PASS
 - Browser viewport automation is not a physical-device iPhone test. Harness records are isolated from the user's stored records.
 
 Local expansion validation passed: 1000/1000 AAC files decoded by ffprobe, all 40 new stages' first audio and ID1000 played in Chrome, 9 expansion checks, 13 review checks, 10 written checks, 11 test/history checks and 6 mastery checks. Full per-file audio integrity evidence is stored in `qa/day11-50/audio-integrity.json`.
+
+Public deployment: source commit `c3e785c128ea07623eb321204f5a8e20813ed195`, successful Pages run [38051858069](https://github.com/hmk83/haru-vocab/actions/runs/38051858069). Live app.js, data.js, index.html and style.css matched local files exactly. The expansion, review, written and test/history harnesses passed against https://hmk83.github.io/haru-vocab/ (43 checks, zero runtime errors). Results JSON files now record the public URL. Audio playback was verified at every newly added stage and the final ID1000 expression.
+All 800 newly added public audio URLs returned HTTP 200 and exactly matched the locally decoded AAC files; evidence: `qa/day11-50/public-audio.json`.

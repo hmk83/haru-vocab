@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T12:24:30.210Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T12:26:08.449Z",
   "checks": [
     "1000 words, 50 stages, 20 per stage, original 200 IDs and meanings preserved",
     "All 50 wordbook routes ordered correctly, mobile width, and 50 test choices",
