@@ -1,10 +1,11 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-10T11:32:49.702Z",
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T11:35:57.676Z",
   "checks": [
-    "New brand and button-style cancel",
+    "Sky dropdown, history/settings links, logo returns to default vocabulary",
+    "Neutral buttons including hover, brand and cancel",
     "Shuffled full study, score-based encouragement and automatic history",
-    "History offers all/wrong scope and English/Korean for both modes, cross-mode review",
+    "No default selections; history offers all/wrong scope and English/Korean for both modes, cross-mode review",
     "100-point celebration, saved completion and corrected words leave wrong-only pool",
     "768x1024 large question area and bottom answers",
     "1280x800 large question area and bottom answers",
