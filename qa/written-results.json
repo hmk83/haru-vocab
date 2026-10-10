@@ -1,0 +1,17 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T11:58:19.180Z",
+  "checks": [
+    "Written menu, English/Korean choice and empty-answer guard",
+    "Korean typed grading, IME safety, modal, mastery, score and automatic history",
+    "Wrong-only Korean questions, case/space tolerant English input and 100-point celebration",
+    "Source expression alternatives accepted, incorrect spelling rejected",
+    "Typed draft survives reload and exit confirmation",
+    "375x640 all 200 written prompts in both languages fit",
+    "375x812 all 200 written prompts in both languages fit",
+    "768x1024 all 200 written prompts in both languages fit",
+    "1440x900 all 200 written prompts in both languages fit",
+    "No runtime errors"
+  ],
+  "errors": []
+}

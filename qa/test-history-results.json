@@ -1,0 +1,18 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "checks": [
+    "Hamburger menu and test setup without default selections",
+    "flash mixed-stage random 30, real completion and stored result",
+    "quiz mixed-stage random 30, real completion and stored result",
+    "written mixed-stage random 30, real completion and stored result",
+    "One-stage test has 30 questions with disclosed repeats",
+    "Frequent mistakes at front of wordbook, all three modes saved",
+    "Weekly/monthly/yearly navigation, persisted history and result drilldown",
+    "375x640 history/test/wordbook no horizontal overflow",
+    "375x812 history/test/wordbook no horizontal overflow",
+    "768x1024 history/test/wordbook no horizontal overflow",
+    "1024x768 history/test/wordbook no horizontal overflow"
+  ],
+  "errors": [],
+  "time": "2026-10-10T11:59:03.067Z"
+}
