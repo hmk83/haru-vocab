@@ -78,3 +78,15 @@ https://hmk83.github.io/haru-vocab/ 에서 동일한 17개 하네스 전부 PASS
 5px 테두리, 0단계 흰색. 정답 +1/오답 -1, -5~+5 제한. 오답 5단계 빨강/정답 5단계 진한 초록. 초록 상태에서도 오답 즉시 아래 단계로 이동. 각 단어의 두 학습 방식·언어에서 공유, 개별 응답 즉시 저장.
 
 `proficiency-harness.cjs` 6개 항목 PASS: 기본 흰색 굵기, 5단계 빨강, 정답으로 복구 및 5단계 초록, 초록→아래 단계 및 새로고침 유지, 객관식 즉시 상태 갱신·중복 답변 방지, 기존 기록 한 번 반영. 기존 `review-harness.cjs` 13개 항목도 모두 PASS.
+
+## Day11–50 expansion
+
+- IMG_1925.HEIC through IMG_1964.HEIC correspond to Day11–50, 20 entries per photograph.
+- All 40 pages visually reviewed after OCR; Korean meanings and English expressions corrected in `qa/day11-50/new-words.json`. Original photographs are not published.
+- 1000 sequential IDs, exactly 20 words per Day, 50 wordbook routes and 50 test-stage choices. Original first 200 entries are byte-equivalent as parsed data to commit 7361089, preserving stored history associations.
+- New 800 AAC files use Samantha (en-US), 155 words/minute. Optional expression spellings normalized before speech generation; existing listening speed setting applies.
+- Expansion harness completes all 20 Day50 questions through real controls in flashcard, multiple-choice and written modes, verifies 100-point records and typed draft reload. Random tests mix Day01 and Day50 for 30 unique questions in all three modes.
+- Layout harness renders all 1000 questions in both languages for flashcard/multiple-choice at 375×640, and written questions at 375×640, 375×812, 768×1024, 1440×900, checking horizontal and vertical overflow. Back confirmation is checked for every Day01–50. Tablet and UHD checks remain included.
+- Browser viewport automation is not a physical-device iPhone test. Harness records are isolated from the user's stored records.
+
+Local expansion validation passed: 1000/1000 AAC files decoded by ffprobe, all 40 new stages' first audio and ID1000 played in Chrome, 9 expansion checks, 13 review checks, 10 written checks, 11 test/history checks and 6 mastery checks. Full per-file audio integrity evidence is stored in `qa/day11-50/audio-integrity.json`.

@@ -1,0 +1,16 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T12:24:30.210Z",
+  "checks": [
+    "1000 words, 50 stages, 20 per stage, original 200 IDs and meanings preserved",
+    "All 50 wordbook routes ordered correctly, mobile width, and 50 test choices",
+    "Day50 flash actual 20 answers, 100 points, automatic record",
+    "Day50 quiz actual 20 answers, 100 points, automatic record",
+    "Day50 written actual 20 answers, 100 points, automatic record",
+    "New-stage history and unfinished typed draft survive reload",
+    "Day50 iPhone mini and tablet layout",
+    "All 1000 audio files present; playback decoded for every new stage and final expression",
+    "No runtime errors"
+  ],
+  "errors": []
+}

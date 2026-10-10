@@ -1,0 +1,334 @@
+{
+  "range": "Day11–50",
+  "count": 800,
+  "sourceMapping": [
+    {
+      "day": 11,
+      "file": "IMG_1925.HEIC",
+      "ids": [
+        201,
+        220
+      ]
+    },
+    {
+      "day": 12,
+      "file": "IMG_1926.HEIC",
+      "ids": [
+        221,
+        240
+      ]
+    },
+    {
+      "day": 13,
+      "file": "IMG_1927.HEIC",
+      "ids": [
+        241,
+        260
+      ]
+    },
+    {
+      "day": 14,
+      "file": "IMG_1928.HEIC",
+      "ids": [
+        261,
+        280
+      ]
+    },
+    {
+      "day": 15,
+      "file": "IMG_1929.HEIC",
+      "ids": [
+        281,
+        300
+      ]
+    },
+    {
+      "day": 16,
+      "file": "IMG_1930.HEIC",
+      "ids": [
+        301,
+        320
+      ]
+    },
+    {
+      "day": 17,
+      "file": "IMG_1931.HEIC",
+      "ids": [
+        321,
+        340
+      ]
+    },
+    {
+      "day": 18,
+      "file": "IMG_1932.HEIC",
+      "ids": [
+        341,
+        360
+      ]
+    },
+    {
+      "day": 19,
+      "file": "IMG_1933.HEIC",
+      "ids": [
+        361,
+        380
+      ]
+    },
+    {
+      "day": 20,
+      "file": "IMG_1934.HEIC",
+      "ids": [
+        381,
+        400
+      ]
+    },
+    {
+      "day": 21,
+      "file": "IMG_1935.HEIC",
+      "ids": [
+        401,
+        420
+      ]
+    },
+    {
+      "day": 22,
+      "file": "IMG_1936.HEIC",
+      "ids": [
+        421,
+        440
+      ]
+    },
+    {
+      "day": 23,
+      "file": "IMG_1937.HEIC",
+      "ids": [
+        441,
+        460
+      ]
+    },
+    {
+      "day": 24,
+      "file": "IMG_1938.HEIC",
+      "ids": [
+        461,
+        480
+      ]
+    },
+    {
+      "day": 25,
+      "file": "IMG_1939.HEIC",
+      "ids": [
+        481,
+        500
+      ]
+    },
+    {
+      "day": 26,
+      "file": "IMG_1940.HEIC",
+      "ids": [
+        501,
+        520
+      ]
+    },
+    {
+      "day": 27,
+      "file": "IMG_1941.HEIC",
+      "ids": [
+        521,
+        540
+      ]
+    },
+    {
+      "day": 28,
+      "file": "IMG_1942.HEIC",
+      "ids": [
+        541,
+        560
+      ]
+    },
+    {
+      "day": 29,
+      "file": "IMG_1943.HEIC",
+      "ids": [
+        561,
+        580
+      ]
+    },
+    {
+      "day": 30,
+      "file": "IMG_1944.HEIC",
+      "ids": [
+        581,
+        600
+      ]
+    },
+    {
+      "day": 31,
+      "file": "IMG_1945.HEIC",
+      "ids": [
+        601,
+        620
+      ]
+    },
+    {
+      "day": 32,
+      "file": "IMG_1946.HEIC",
+      "ids": [
+        621,
+        640
+      ]
+    },
+    {
+      "day": 33,
+      "file": "IMG_1947.HEIC",
+      "ids": [
+        641,
+        660
+      ]
+    },
+    {
+      "day": 34,
+      "file": "IMG_1948.HEIC",
+      "ids": [
+        661,
+        680
+      ]
+    },
+    {
+      "day": 35,
+      "file": "IMG_1949.HEIC",
+      "ids": [
+        681,
+        700
+      ]
+    },
+    {
+      "day": 36,
+      "file": "IMG_1950.HEIC",
+      "ids": [
+        701,
+        720
+      ]
+    },
+    {
+      "day": 37,
+      "file": "IMG_1951.HEIC",
+      "ids": [
+        721,
+        740
+      ]
+    },
+    {
+      "day": 38,
+      "file": "IMG_1952.HEIC",
+      "ids": [
+        741,
+        760
+      ]
+    },
+    {
+      "day": 39,
+      "file": "IMG_1953.HEIC",
+      "ids": [
+        761,
+        780
+      ]
+    },
+    {
+      "day": 40,
+      "file": "IMG_1954.HEIC",
+      "ids": [
+        781,
+        800
+      ]
+    },
+    {
+      "day": 41,
+      "file": "IMG_1955.HEIC",
+      "ids": [
+        801,
+        820
+      ]
+    },
+    {
+      "day": 42,
+      "file": "IMG_1956.HEIC",
+      "ids": [
+        821,
+        840
+      ]
+    },
+    {
+      "day": 43,
+      "file": "IMG_1957.HEIC",
+      "ids": [
+        841,
+        860
+      ]
+    },
+    {
+      "day": 44,
+      "file": "IMG_1958.HEIC",
+      "ids": [
+        861,
+        880
+      ]
+    },
+    {
+      "day": 45,
+      "file": "IMG_1959.HEIC",
+      "ids": [
+        881,
+        900
+      ]
+    },
+    {
+      "day": 46,
+      "file": "IMG_1960.HEIC",
+      "ids": [
+        901,
+        920
+      ]
+    },
+    {
+      "day": 47,
+      "file": "IMG_1961.HEIC",
+      "ids": [
+        921,
+        940
+      ]
+    },
+    {
+      "day": 48,
+      "file": "IMG_1962.HEIC",
+      "ids": [
+        941,
+        960
+      ]
+    },
+    {
+      "day": 49,
+      "file": "IMG_1963.HEIC",
+      "ids": [
+        961,
+        980
+      ]
+    },
+    {
+      "day": 50,
+      "file": "IMG_1964.HEIC",
+      "ids": [
+        981,
+        1000
+      ]
+    }
+  ],
+  "review": "All 40 original pages visually compared; OCR corrections applied before app data import. Original images are not redistributed.",
+  "audio": {
+    "voice": "Samantha",
+    "language": "en-US",
+    "wordsPerMinute": 155,
+    "codec": "AAC",
+    "sampleRate": 44100
+  }
+}
