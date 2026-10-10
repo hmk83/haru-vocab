@@ -1,0 +1,17 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T11:31:41.239Z",
+  "checks": [
+    "New brand and button-style cancel",
+    "Shuffled full study, score-based encouragement and automatic history",
+    "History offers all/wrong scope and English/Korean for both modes, cross-mode review",
+    "100-point celebration, saved completion and corrected words leave wrong-only pool",
+    "768x1024 large question area and bottom answers",
+    "1280x800 large question area and bottom answers",
+    "1440x900 large question area and bottom answers",
+    "3840x2160 large question area and bottom answers",
+    "iPhone mini all 200 questions, both modes and languages fit",
+    "No runtime errors"
+  ],
+  "errors": []
+}

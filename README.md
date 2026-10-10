@@ -1,11 +1,13 @@
-# 하루 단어
+# 현하늘의 영어 단어
 
 Day01–10 영어 단어 학습 사이트. 각 Day 20개, 총 200개 단어 및 표현을 제공한 사진 10장과 직접 대조했습니다. 사진 원본은 저장소에 포함하지 않습니다.
 
 - 단어 및 뜻 목록, 미국 영어 Samantha 음성 파일 200개
 - 플래시카드: 영어/한글 문항 선택, 해석 확인 후 O/X 자기 평가
 - 객관식: 영어→한글 또는 한글→영어, 중복 없는 4개 선택지, 모달 정답 확인
+- 모든 새 학습/재학습 문항 셔플, 학습 이력이 있으면 언어 및 전체/오답 범위 선택
 - 오답만 재학습, 전체 재학습, 중간 학습 자동 저장 및 이어하기
+- 점수별 응원 메시지, 100점 완료 시 축하 효과
 - 날짜별 완료 학습 횟수, 점수, 개별 오답, 누적 오답 순위
 - 학습 결과 및 듣기 속도 자동 저장 (기기 브라우저 localStorage)
 - 모바일·태블릿·PC 반응형, 키보드 포커스 및 버튼 접근성
@@ -16,7 +18,7 @@ Day01–10 영어 단어 학습 사이트. 각 Day 20개, 총 200개 단어 및 
 python3 -m http.server 8765
 ```
 
-http://localhost:8765 접속. `qa/compact-harness.cjs`는 Playwright 브라우저 하네스이며, 환경의 Playwright와 Chrome 경로에 맞춰 실행합니다. 테스트 데이터는 브라우저 격리 컨텍스트에만 저장됩니다.
+http://localhost:8765 접속. `qa/review-harness.cjs`는 Playwright 브라우저 하네스이며, 환경의 Playwright와 Chrome 경로에 맞춰 실행합니다. 테스트 데이터는 브라우저 격리 컨텍스트에만 저장됩니다.
 
 ## 저장과 점수
 
@@ -33,3 +35,5 @@ GitHub Actions가 정적 파일과 audio만 GitHub Pages에 배포합니다. 로
 ## 참고
 
 단어장·카드 분류 흐름: [원보카](https://play.google.com/store/apps/details?id=com.zak1ller.Onevoca), [Quizlet Flashcards](https://help.quizlet.com/hc/en-ca/articles/360030988091-Studying-with-Flashcards). 본 사이트의 화면과 코드는 별도로 구현했습니다.
+
+오답 범위는 같은 Day에서 각 단어의 가장 최근 완료 학습 응답을 기준으로 합니다. 플래시카드/객관식이 이 오답 목록을 공유하며, 복습에서 맞힌 단어는 다음 오답 학습에서 제외됩니다. PC·태블릿에서는 문항 영역이 화면 높이를 채우고 답변 버튼은 하단에 배치됩니다.
