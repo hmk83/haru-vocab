@@ -101,3 +101,9 @@ Each Day01–50 word row and frequent-mistakes row now displays a 12px dot befor
 Extended proficiency harness: 9 checks passed locally, including actual flashcard answers changing dot colors, red frequent-mistakes dots, green recovery/demotion, reload/migration, and all 50 lists at 375×640, 375×812, 768×1024 and 1440×900 without horizontal overflow.
 
 Public status-dot deployment: commit `31c8a67233db4b5726dc5f0c45f6a4c4373b133a`, successful Pages run [38052703818](https://github.com/hmk83/haru-vocab/actions/runs/38052703818). Live app.js/style.css matched local bytes; all 9 extended proficiency/dot checks passed against the public site with no runtime errors.
+
+## Sticky navigation and learning list usability
+
+Replaced font-glyph hamburger with three fixed 20×2px bars in a 44×44px touch button. Header spans the viewport and stays at the top with safe-area padding. Day lists have a second sticky toolbar containing the current Day and previous/next 44px controls (bounded to Day01–50); switching Day resets scroll to the first word. Enlarged desktop word/meaning text and all list audio buttons to at least 44px, keeping the existing mobile one-line-per-language arrangement and proficiency dots.
+
+Local navigation harness: 10 checks passed across 320×568, 375×640, 375×812, 768×1024, 1024×768 and 1440×900. Verified actual scrolling, pinned header/Day and bottom study buttons, menu geometry/open/close/Escape focus, stage transitions and boundaries, home/test header, and focused study/exit flow. Existing 13-check review harness also passed with all 1000 flashcard/quiz prompts in both languages. No runtime errors.

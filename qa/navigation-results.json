@@ -1,0 +1,17 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T13:18:52.718Z",
+  "checks": [
+    "320x568: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "375x640: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "375x812: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "768x1024: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "1024x768: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "1440x900: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
+    "Day01/Day50 navigation boundaries",
+    "Header remains fixed in wordbook and test setup",
+    "Study keeps full-screen focus and existing exit confirmation",
+    "No runtime errors"
+  ],
+  "errors": []
+}
