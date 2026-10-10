@@ -1,0 +1,4 @@
+.DS_Store
+qa/*.png
+qa/backup-test.json
+_site/

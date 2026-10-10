@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T11:12:41.287Z",
+  "checks": [
+    "Day01–10 order, 200 unique words, all day views",
+    "Standard English audio file decodes and plays",
+    "Flashcards reveal, O/X advance, score and wrong answers saved",
+    "Only wrong cards retry creates independent record",
+    "Full restart and interrupted session resumes after reload",
+    "4-choice quiz en direction, feedback, score, no duplicate submissions",
+    "4-choice quiz ko direction, feedback, score, no duplicate submissions",
+    "History persistence, date count, scores and cumulative wrong ranking",
+    "Backup, restore and idempotent merge",
+    "Invalid imports preserve history",
+    "mobile home, vocabulary, history, quiz responsive",
+    "small-mobile home, vocabulary, history, quiz responsive",
+    "ipad-mini home, vocabulary, history, quiz responsive",
+    "galaxy-tab home, vocabulary, history, quiz responsive",
+    "pc home, vocabulary, history, quiz responsive",
+    "uhd home, vocabulary, history, quiz responsive",
+    "No browser runtime errors"
+  ],
+  "errors": []
+}
