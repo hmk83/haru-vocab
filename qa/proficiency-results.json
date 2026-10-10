@@ -1,12 +1,15 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T12:20:44.086Z",
+  "time": "2026-10-10T12:38:11.841Z",
   "checks": [
     "New word has thick white border",
+    "Wordbook dots start white with accessible status",
     "Five mistakes descend through yellow/orange to red",
+    "Frequent mistakes list shares live dot status",
     "Correct answers recover from red and five positive levels reach green",
     "Green drops immediately on mistake and state survives reload",
     "Quiz shares level, updates on answer before completion, ignores duplicates",
-    "Existing history migrates once without double counting"
+    "Existing history migrates once without double counting",
+    "All 50 wordbooks have 20 dots and fit mini, tablet and PC widths"
   ]
 }

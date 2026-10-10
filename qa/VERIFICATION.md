@@ -93,3 +93,9 @@ Local expansion validation passed: 1000/1000 AAC files decoded by ffprobe, all 4
 
 Public deployment: source commit `c3e785c128ea07623eb321204f5a8e20813ed195`, successful Pages run [38051858069](https://github.com/hmk83/haru-vocab/actions/runs/38051858069). Live app.js, data.js, index.html and style.css matched local files exactly. The expansion, review, written and test/history harnesses passed against https://hmk83.github.io/haru-vocab/ (43 checks, zero runtime errors). Results JSON files now record the public URL. Audio playback was verified at every newly added stage and the final ID1000 expression.
 All 800 newly added public audio URLs returned HTTP 200 and exactly matched the locally decoded AAC files; evidence: `qa/day11-50/public-audio.json`.
+
+## Wordbook status dots
+
+Each Day01–50 word row and frequent-mistakes row now displays a 12px dot before the English expression. It uses the same persisted -5 through +5 proficiency scale as the question border: white initially, yellow/orange/red after mistakes, light/dark green after correct answers. A subsequent mistake lowers green immediately. The dot has an accessible status label and desktop tooltip; it does not add visible instructional text.
+
+Extended proficiency harness: 9 checks passed locally, including actual flashcard answers changing dot colors, red frequent-mistakes dots, green recovery/demotion, reload/migration, and all 50 lists at 375×640, 375×812, 768×1024 and 1440×900 without horizontal overflow.
