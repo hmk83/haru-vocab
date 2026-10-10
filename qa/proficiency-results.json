@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T11:41:33.581Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T11:42:45.995Z",
   "checks": [
     "New word has thick white border",
     "Five mistakes descend through yellow/orange to red",
