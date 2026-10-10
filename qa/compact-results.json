@@ -1,0 +1,19 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-10T11:24:34.620Z",
+  "checks": [
+    "Compact fixed bottom study menu",
+    "flash en language, compact controls and modal",
+    "flash ko language, compact controls and modal",
+    "quiz en language, compact controls and modal",
+    "quiz ko language, compact controls and modal",
+    "Mobile English and Korean separate rows; playback speed applies and persists",
+    "Automatic history, reload persistence and Korean wrong-only review; backup menus removed",
+    "375x640 all 200 words, 2 modes, 2 languages without scrolling",
+    "375x812 all 200 words, 2 modes, 2 languages without scrolling",
+    "768x1024 all 200 words, 2 modes, 2 languages without scrolling",
+    "1440x900 all 200 words, 2 modes, 2 languages without scrolling",
+    "No runtime errors"
+  ],
+  "errors": []
+}
