@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T13:18:52.718Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T13:22:09.702Z",
   "checks": [
     "320x568: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
     "375x640: stable 3-bar menu, sticky header/Day, menu/Escape, bottom study dock and stage navigation",
