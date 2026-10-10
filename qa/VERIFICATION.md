@@ -99,3 +99,5 @@ All 800 newly added public audio URLs returned HTTP 200 and exactly matched the 
 Each Day01–50 word row and frequent-mistakes row now displays a 12px dot before the English expression. It uses the same persisted -5 through +5 proficiency scale as the question border: white initially, yellow/orange/red after mistakes, light/dark green after correct answers. A subsequent mistake lowers green immediately. The dot has an accessible status label and desktop tooltip; it does not add visible instructional text.
 
 Extended proficiency harness: 9 checks passed locally, including actual flashcard answers changing dot colors, red frequent-mistakes dots, green recovery/demotion, reload/migration, and all 50 lists at 375×640, 375×812, 768×1024 and 1440×900 without horizontal overflow.
+
+Public status-dot deployment: commit `31c8a67233db4b5726dc5f0c45f6a4c4373b133a`, successful Pages run [38052703818](https://github.com/hmk83/haru-vocab/actions/runs/38052703818). Live app.js/style.css matched local bytes; all 9 extended proficiency/dot checks passed against the public site with no runtime errors.
