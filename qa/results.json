@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-10T11:12:41.287Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-10T11:14:07.576Z",
   "checks": [
     "Day01–10 order, 200 unique words, all day views",
     "Standard English audio file decodes and plays",
