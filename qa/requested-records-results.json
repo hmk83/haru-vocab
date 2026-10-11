@@ -1,0 +1,13 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:16:24.132Z",
+  "checks": [
+    "No resume button with existing draft",
+    "No automatic insertion on link open",
+    "Day01 and Day02 October 10 quiz 100 points",
+    "Existing records and draft preserved",
+    "Duplicate-safe and reload persistent",
+    "Other browser untouched",
+    "Mobile fits"
+  ]
+}
