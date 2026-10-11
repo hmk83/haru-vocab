@@ -1,6 +1,6 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-11T00:12:43.231Z",
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:18:16.401Z",
   "checks": [
     "flash true sound nodes running and matching visual",
     "flash false sound nodes running and matching visual",
@@ -8,8 +8,8 @@
     "quiz false sound nodes running and matching visual",
     "written true sound nodes running and matching visual",
     "written false sound nodes running and matching visual",
-    "flash reveal uses wrong feedback",
-    "written reveal uses wrong feedback",
+    "flash explicit wrong feedback",
+    "written explicit wrong feedback",
     "Sound-off persists across reload while visual remains",
     "Reduced motion disables animations"
   ],
