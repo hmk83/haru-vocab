@@ -1,0 +1,18 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab/",
+  "time": "2026-10-11T10:08:40.682Z",
+  "checks": [
+    "Prior private cloud record migrates automatically without entering a connection code",
+    "Fresh independent browser automatically downloads shared history and mastery",
+    "Settings contains no pairing code, copy or connection controls",
+    "flash result appears in shared history without pairing",
+    "quiz result appears in shared history without pairing",
+    "written result appears in shared history without pairing",
+    "Already-open second browser refreshes automatically without reload or manual sync",
+    "Offline result uploads automatically on reconnection and survives independent reload",
+    "Code-free settings fits iPhone mini and tablet viewport sizes",
+    "Shared reset clears linked browser history and does not resurrect migrated data"
+  ],
+  "errors": [],
+  "isolatedTestNamespace": true
+}

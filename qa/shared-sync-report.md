@@ -2,7 +2,7 @@
 
 The user selected public shared history after confirming that all visitors can see and contribute to the same records. The website now automatically chooses the common shared profile; the pairing code controls are removed.
 
-10 local harness checks passed against the real Supabase backend:
+10 local and 10 public-site harness checks passed against the real Supabase backend:
 
 - Download and migrate the prior device's private cloud history without user input.
 - Fresh independent browser downloads the same scores, answers and mastery automatically.
@@ -16,3 +16,5 @@ The user selected public shared history after confirming that all visitors can s
 The mode checks account for three separate checks, giving ten total. All harness records are synthetic and use a fresh isolated shared namespace. The harness never inserts scores into or resets the actual public learner's shared profile. Browser viewport simulations are not physical-device tests.
 
 Harness: `qa/shared-sync-harness.cjs`. Machine-readable local and public evidence: `shared-sync-results.json` and `shared-sync-results-public.json`.
+
+Public deployment: `2cb03bb942e5e55c8e1bb0ead35a3fc34940371a`; GitHub Pages run `38130822664` succeeded. The real public settings screen was also checked with no pairing controls and successful automatic synchronization.

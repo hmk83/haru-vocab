@@ -23,15 +23,17 @@ History reset uses the requested `3323` UI confirmation and resets the common hi
 
 ## Verified
 
-- Local and deployed cloud harness: `qa/cloud-sync-harness.cjs`, 17 checks each.
+- Prior private-mode local and deployed cloud harness: `qa/cloud-sync-harness.cjs`, 17 checks each.
 - Existing-history migration, 1,025 answer events, concurrent devices, committed upload with lost response: `qa/cloud-sync-edge-harness.cjs`, 3 checks.
 - Neutral flashcard interpretation and responsive study layout: `qa/flash-reveal-harness.cjs`, 11 checks.
 - Browser viewport checks: 375×640, 375×812, 768×1024, 1024×768; flashcards additionally 1440×900. These are browser simulations, not physical-device tests.
 - Three database tables confirmed with RLS enabled; anonymous read without connection code returns zero rows, unauthorized insert is rejected; default privileged function execute permissions confirmed false.
-- Production deployment commit: `289490d0f80d1618996235b73746e96ad24caae6`, GitHub Pages run `38130298238`, successful.
+- Production deployment commit: `2cb03bb942e5e55c8e1bb0ead35a3fc34940371a`, GitHub Pages run `38130822664`, successful.
 
 All harness profiles use fresh random test codes. The tests do not reset or modify the user's existing browser history.
 
 Final mobile pairing layout was also checked on the published build after the CSS adjustment: 375×640, 375×812, 768×1024, 1024×768.
 
 Shared-mode regression: `qa/shared-sync-harness.cjs` uses a fresh, isolated shared test namespace, so its synthetic results and reset never affect real public history. It verifies automatic legacy migration, no pairing controls, all modes, automatic background refresh, offline recovery, reload and responsive settings.
+
+Current public shared mode: all 10 local and 10 deployed shared-mode harness checks passed; see `qa/shared-sync-report.md`.
