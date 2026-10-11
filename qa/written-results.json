@@ -1,6 +1,6 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-10T12:25:55.543Z",
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:03:56.264Z",
   "checks": [
     "Written menu, English/Korean choice and empty-answer guard",
     "Korean typed grading, IME safety, modal, mastery, score and automatic history",

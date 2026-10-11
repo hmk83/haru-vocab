@@ -1,0 +1,19 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:03:55.423Z",
+  "checks": [
+    "en day reveal, duplicate guard, modal, draft, score, persisted history",
+    "en test reveal, duplicate guard, modal, draft, score, persisted history",
+    "en frequent reveal, duplicate guard, modal, draft, score, persisted history",
+    "ko day reveal, duplicate guard, modal, draft, score, persisted history",
+    "ko test reveal, duplicate guard, modal, draft, score, persisted history",
+    "ko frequent reveal, duplicate guard, modal, draft, score, persisted history",
+    "320x568 controls fit",
+    "375x640 controls fit",
+    "375x812 controls fit",
+    "768x1024 controls fit",
+    "1024x768 controls fit",
+    "1440x900 controls fit"
+  ],
+  "errors": []
+}
