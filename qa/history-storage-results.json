@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-11T00:26:34.815Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-11T00:27:34.986Z",
   "checks": [
     "Two tabs retain both records and history reads current storage",
     "Flash quiz written completion and reload persist",
