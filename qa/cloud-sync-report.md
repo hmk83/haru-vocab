@@ -8,6 +8,8 @@ Three additional checks passed: automatic migration of older local records, comp
 
 The flashcard regression harness passed 11 checks, including interpretation without grading and five viewport sizes. No JavaScript page errors occurred in the cloud harness.
 
-Public deployment: `100d853ac0c7339e8f8aba7fe014850c5c854a52`, Pages run `38130113167` succeeded. Machine-readable results: `cloud-sync-results.json`, `cloud-sync-results-public.json`, `cloud-sync-edge-results.json`, `flash-reveal-results.json`.
+Public deployment: `289490d0f80d1618996235b73746e96ad24caae6`, Pages run `38130298238` succeeded. Machine-readable results: `cloud-sync-results.json`, `cloud-sync-results-public.json`, `cloud-sync-edge-results.json`, `flash-reveal-results.json`.
 
 Pairing still requires entering the same private connection code once on each real device. Browser contexts prove cross-browser persistence; they do not claim the user's physical iPhone has been paired.
+
+Final mobile pairing layout was also checked on the published build after the CSS adjustment: 375×640, 375×812, 768×1024, 1024×768.

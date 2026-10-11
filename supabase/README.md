@@ -26,6 +26,8 @@ History reset uses the requested `3323` confirmation password. It resets the pai
 - Neutral flashcard interpretation and responsive study layout: `qa/flash-reveal-harness.cjs`, 11 checks.
 - Browser viewport checks: 375×640, 375×812, 768×1024, 1024×768; flashcards additionally 1440×900. These are browser simulations, not physical-device tests.
 - Three database tables confirmed with RLS enabled; anonymous read without connection code returns zero rows, unauthorized insert is rejected; default privileged function execute permissions confirmed false.
-- Production deployment commit: `100d853ac0c7339e8f8aba7fe014850c5c854a52`, GitHub Pages run `38130113167`, successful.
+- Production deployment commit: `289490d0f80d1618996235b73746e96ad24caae6`, GitHub Pages run `38130298238`, successful.
 
 All harness profiles use fresh random test codes. The tests do not reset or modify the user's existing browser history.
+
+Final mobile pairing layout was also checked on the published build after the CSS adjustment: 375×640, 375×812, 768×1024, 1024×768.
