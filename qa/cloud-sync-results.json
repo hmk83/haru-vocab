@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T09:54:02.644Z",
+  "checks": [
+    "Real Supabase profile created and browser CORS connection works",
+    "One ALL button selects and deselects all 50 stages",
+    "Second independent browser paired through settings UI",
+    "Completed flash score screen button saves and second browser shows history",
+    "Completed quiz score screen button saves and second browser shows history",
+    "Completed written score screen button saves and second browser shows history",
+    "Reload retains exact scores, answers and mastery across browsers",
+    "Unpaired browser and public API key cannot read or write paired records",
+    "Offline completion queued locally and synchronized on reconnection",
+    "Selected-stage random 30-question test result also synchronizes",
+    "Frequent-mistake learning in all three modes synchronizes",
+    "Retry, restart, history and wordbook result buttons await server confirmation",
+    "375x640 pairing/settings accessible without horizontal overflow",
+    "375x812 pairing/settings accessible without horizontal overflow",
+    "768x1024 pairing/settings accessible without horizontal overflow",
+    "1024x768 pairing/settings accessible without horizontal overflow",
+    "Password reset propagates to paired browsers; old records do not resurrect"
+  ],
+  "errors": []
+}

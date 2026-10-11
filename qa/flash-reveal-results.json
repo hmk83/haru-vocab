@@ -1,6 +1,6 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-11T00:19:01.876Z",
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T09:54:55.734Z",
   "checks": [
     "en day reveal neutral, toggle, reload, O/X score and history",
     "en test reveal neutral, toggle, reload, O/X score and history",
