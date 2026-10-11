@@ -58,3 +58,4 @@ header{position:sticky;top:0;z-index:20;max-width:none;width:100%;height:calc(va
 .stage-bulk{margin-bottom:14px}.stage-bulk button{font-size:14px;min-height:44px;padding:8px 16px}
 
 .sync-status{font-size:13px;color:#5d6b66;margin:6px 0 16px}.sync-settings{border-bottom:1px solid #d7ddda;padding-bottom:20px;margin-bottom:20px}.sync-settings h3{font-size:17px}.sync-settings input{display:block;width:100%;min-width:0;font:inherit;font-size:14px;padding:10px;border:1px solid #cbd3d0;border-radius:10px;margin:8px 0;overflow-wrap:anywhere}.sync-settings button{font-size:14px;min-height:44px}.sync-settings label{font-size:14px}.sync-settings .muted{font-size:13px}#sync-error{font-size:13px;color:#a44434}[aria-busy="true"]{opacity:.6;pointer-events:none}
+.sync-settings>button{width:100%}.sync-settings label{display:block;text-align:left;margin-top:16px}

@@ -1,0 +1,9 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T09:57:01.969Z",
+  "checks": [
+    "Existing local history migrates automatically and more than 1000 answer events download completely",
+    "Simultaneous learning on independent browsers merges without overwriting either completion",
+    "Lost response after committed upload retries without duplicate history"
+  ]
+}
