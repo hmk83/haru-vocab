@@ -1,0 +1,17 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:11:10.792Z",
+  "checks": [
+    "flash true sound nodes running and matching visual",
+    "flash false sound nodes running and matching visual",
+    "quiz true sound nodes running and matching visual",
+    "quiz false sound nodes running and matching visual",
+    "written true sound nodes running and matching visual",
+    "written false sound nodes running and matching visual",
+    "flash reveal uses wrong feedback",
+    "written reveal uses wrong feedback",
+    "Sound-off persists across reload while visual remains",
+    "Reduced motion disables animations"
+  ],
+  "errors": []
+}
