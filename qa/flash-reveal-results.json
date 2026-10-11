@@ -1,0 +1,19 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:06:17.891Z",
+  "checks": [
+    "en day reveal wrong, duplicate guard, reload, direct O, score and history",
+    "en test reveal wrong, duplicate guard, reload, direct O, score and history",
+    "en frequent reveal wrong, duplicate guard, reload, direct O, score and history",
+    "ko day reveal wrong, duplicate guard, reload, direct O, score and history",
+    "ko test reveal wrong, duplicate guard, reload, direct O, score and history",
+    "ko frequent reveal wrong, duplicate guard, reload, direct O, score and history",
+    "Direct X records incorrect answer",
+    "375x640 flash and feedback fit",
+    "375x812 flash and feedback fit",
+    "768x1024 flash and feedback fit",
+    "1024x768 flash and feedback fit",
+    "1440x900 flash and feedback fit"
+  ],
+  "errors": []
+}

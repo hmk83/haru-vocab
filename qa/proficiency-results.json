@@ -1,6 +1,6 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-10T12:39:17.961Z",
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:06:45.260Z",
   "checks": [
     "New word has thick white border",
     "Wordbook dots start white with accessible status",
