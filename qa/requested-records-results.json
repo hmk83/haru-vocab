@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-11T00:16:24.132Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-11T00:17:11.959Z",
   "checks": [
     "No resume button with existing draft",
     "No automatic insertion on link open",
