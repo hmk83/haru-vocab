@@ -5,17 +5,19 @@ Supabase project: `haru-vocab-sync` (`tvaqnawrciznzebqbupf`), Seoul, Free plan.
 
 GitHub Pages serves the website; Supabase stores completed learning records and answer events. `sync-config.js` contains only the public publishable key. No database password, secret API key, or service-role key is shipped.
 
-## Pair devices once
+## Automatic shared records
 
-On the device containing the original learning history, open Menu → Settings → 기기 동기화 → 연결 코드 보기 → 코드 복사. On each other device, paste that code into 다른 기기 연결 코드 and select 연결. Existing records from both devices merge. Subsequent answers and completed learning automatically synchronize, including ordinary stages, tests and frequent-mistake practice. Visible pages refresh every 30 seconds and when returning to the browser. Result-screen buttons await cloud confirmation before continuing. Keep the code private: it grants access to that learning history.
+The user explicitly selected public shared learning history. `sync-config.js` supplies the common public profile code automatically. No login, code copying or pairing UI is required. All visitors see and contribute to the same history. The profile code is public by design, not a private credential.
 
-Old local history uploads when the updated app opens. Offline results remain on the device and retry when connectivity returns. In-progress question navigation remains local; graded answer events and completed scores synchronize.
+When the updated app opens, an existing private device code is used once to download that device's accessible cloud history, then the history is merged into the public shared profile. Existing local history also uploads. Private profiles for unrelated codes are not migrated or exposed. A device must reopen the updated site for its older records to migrate.
 
-History reset uses the requested `3323` confirmation password. It resets the paired history and mastery across devices, using a reset timestamp to prevent an old offline browser from restoring deleted records. The password is a UI confirmation, not the data access credential; server access requires the connection code.
+Subsequent graded answers and completed learning automatically synchronize, including ordinary stages, tests and frequent-mistake practice. Visible pages refresh every 30 seconds and when returning to the browser. Result-screen buttons await cloud confirmation before continuing. Offline results remain local and retry when connectivity returns. In-progress question navigation remains local.
+
+History reset uses the requested `3323` UI confirmation and resets the common history and mastery across all visitors. A server reset timestamp prevents old offline devices from restoring pre-reset records. It is a UI safeguard, not private access control for this intentionally public profile.
 
 ## Database
 
-`setup.sql` defines the three tables, explicit anon grants and row-level policies. Only the SHA-256 hash of the randomly generated 256-bit connection code is stored as the owner key. Requests present the code in `x-vocab-key`; RLS computes its hash and restricts rows to that owner. Insert policies reject records predating the owner's reset timestamp. Primary keys `(key_hash,id)` also prevent duplicate uploads.
+`setup.sql` defines the three tables, explicit anon grants and row-level policies. Only the SHA-256 hash of each 256-bit profile code is stored as the owner key. The shared profile code is included in public frontend configuration by user request. Requests present the code in `x-vocab-key`; RLS computes its hash and restricts rows to that owner. Insert policies reject records predating the owner's reset timestamp. Primary keys `(key_hash,id)` also prevent duplicate uploads.
 
 `harden-defaults.sql` revokes public execution of the optional Supabase auto-RLS administrative event-trigger function. Its owner can still use the automatic RLS trigger.
 
@@ -31,3 +33,5 @@ History reset uses the requested `3323` confirmation password. It resets the pai
 All harness profiles use fresh random test codes. The tests do not reset or modify the user's existing browser history.
 
 Final mobile pairing layout was also checked on the published build after the CSS adjustment: 375×640, 375×812, 768×1024, 1024×768.
+
+Shared-mode regression: `qa/shared-sync-harness.cjs` uses a fresh, isolated shared test namespace, so its synthetic results and reset never affect real public history. It verifies automatic legacy migration, no pairing controls, all modes, automatic background refresh, offline recovery, reload and responsive settings.

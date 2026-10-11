@@ -1,4 +1,6 @@
-# Cloud sync harness verification
+Current shared-mode validation is documented in `shared-sync-report.md`. The report below describes the earlier private pairing configuration.
+
+# Prior private-mode cloud sync verification
 
 The app at https://hmk83.github.io/haru-vocab/ was tested against the real dedicated Supabase project using independent isolated browser contexts.
 
