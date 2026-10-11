@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-11T00:03:55.423Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-11T00:04:45.602Z",
   "checks": [
     "en day reveal, duplicate guard, modal, draft, score, persisted history",
     "en test reveal, duplicate guard, modal, draft, score, persisted history",
