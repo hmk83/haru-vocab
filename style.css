@@ -54,3 +54,5 @@ header{position:sticky;top:0;z-index:20;max-width:none;width:100%;height:calc(va
 @keyframes answer-pop{0%{opacity:0;transform:translate(-50%,8px) scale(.92)}20%,70%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-8px)}}@keyframes feedback-pop{from{opacity:.4;transform:scale(.9)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.answer-effect,.feedback-modal strong{animation:none}}
 
 .history-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.history-heading>button{font-size:13px;min-height:44px}#reset-password{display:block;width:100%;font:inherit;font-size:18px;padding:12px;margin-top:8px;border:1px solid #cbd3d0;border-radius:10px}#reset-error{color:#a44434;min-height:20px;font-size:14px}
+
+.stage-bulk{margin-bottom:14px}.stage-bulk button{font-size:14px;min-height:44px;padding:8px 16px}
