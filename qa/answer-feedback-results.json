@@ -1,6 +1,6 @@
 {
-  "base": "http://127.0.0.1:8873",
-  "time": "2026-10-11T00:11:10.792Z",
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-11T00:12:43.231Z",
   "checks": [
     "flash true sound nodes running and matching visual",
     "flash false sound nodes running and matching visual",
