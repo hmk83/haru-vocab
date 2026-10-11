@@ -1,5 +1,5 @@
 {
-  "base": "https://hmk83.github.io/haru-vocab",
+  "base": "http://127.0.0.1:8873",
   "checks": [
     "Hamburger menu and test setup without default selections",
     "flash mixed-stage random 30, real completion and stored result",
@@ -14,5 +14,5 @@
     "1024x768 history/test/wordbook no horizontal overflow"
   ],
   "errors": [],
-  "time": "2026-10-10T12:26:03.943Z"
+  "time": "2026-10-11T00:26:25.014Z"
 }

@@ -1,0 +1,14 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-11T00:26:34.815Z",
+  "checks": [
+    "Two tabs retain both records and history reads current storage",
+    "Flash quiz written completion and reload persist",
+    "Current weekly monthly yearly history shows completed sessions",
+    "Storage failure preserves completed draft; retry saves once",
+    "Reload recovers unsaved completed draft",
+    "Wrong password and cancel leave data untouched",
+    "3323 clears history mistakes mastery draft and other tabs; reload stays empty",
+    "New learning works after reset"
+  ]
+}
