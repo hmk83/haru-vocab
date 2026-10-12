@@ -31,3 +31,5 @@ List-only release `6786f5069e8babd849b03d8ba10d26b7c7df0d67` deployed successful
 ## Follow-up: centered entry choices
 
 Entry screen removes the title/mark/header and lower dock, showing two large centered Day and Phonics navigation buttons. Mobile stacks the two buttons; tablet/desktop and landscape show them side by side. `qa/launch-options-harness.cjs` verifies exact labels, absence of title, central alignment, large touch targets and no scrolling in six viewports, plus both navigation destinations and logo return behavior.
+
+Centered entry release `3b69aae4550ad6c5ad47a54fdf952a89f4833c0f` deployed successfully in Pages run [38212713529](https://github.com/hmk83/haru-vocab/actions/runs/38212713529). The entry/navigation harness also passed on the public site (`qa/launch-options-results-public.json`).

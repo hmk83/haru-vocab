@@ -1,0 +1,9 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-12T06:29:40.343Z",
+  "checks": [
+    "Six viewport sizes show only two large centered Day/Phonics choices without title or scrolling",
+    "Day and Phonics navigate correctly; logo returns to choice screen and phonics remains lists only"
+  ],
+  "errors": []
+}
