@@ -1,0 +1,5 @@
+# Ungraded Day flashcards
+
+Flashcards show English with a listening button. One full-width lower button first reveals Korean below English, then advances on the next click. No O/X controls, answer effects, score, mastery update or completed learning record is generated. Completion offers repeat/list only. Existing completed records are retained. Graded legacy flash drafts resume without their previous answer payloads. Quiz and written grading/history synchronization remain available.
+
+`qa/flash-reading-harness.cjs` passed 7 local checks: full 20-card completion without local/cloud writes, reveal/advance/reload behavior, repeated shuffle, responsive order and lower button across five viewport sizes, legacy draft recovery, quiz/written independent-browser result synchronization and a 30-card selected-stage flash test without saving scores or records. Cloud checks use isolated random profile keys; real public learner records are untouched. This new harness supersedes older checks that expected flash O/X grading.
