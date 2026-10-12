@@ -27,3 +27,7 @@ Direct bilingual cards deployed as `865c985670cb45e2d8b1eca9a7099796a3c2c0f1` in
 Removed the phonics flashcard entry, session renderer and next-card handler. Lists retain all 654 items and their responsive grid. Existing phonics drafts return to their consonant list; existing completed records remain readable with no restart action. Day flashcards remain unchanged. `qa/phonics-list-only.cjs` replaces the prior phonics session harness for the current feature scope and checks all groups, five viewport sizes, legacy-state recovery and Day controls.
 
 List-only release `6786f5069e8babd849b03d8ba10d26b7c7df0d67` deployed successfully in Pages run [38212037471](https://github.com/hmk83/haru-vocab/actions/runs/38212037471). The four list-only checks also passed on the public site, recorded in `qa/phonics-list-only-results-public.json`.
+
+## Follow-up: centered entry choices
+
+Entry screen removes the title/mark/header and lower dock, showing two large centered Day and Phonics navigation buttons. Mobile stacks the two buttons; tablet/desktop and landscape show them side by side. `qa/launch-options-harness.cjs` verifies exact labels, absence of title, central alignment, large touch targets and no scrolling in six viewports, plus both navigation destinations and logo return behavior.

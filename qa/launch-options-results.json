@@ -1,0 +1,9 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "time": "2026-10-12T06:28:16.379Z",
+  "checks": [
+    "Six viewport sizes show only two large centered Day/Phonics choices without title or scrolling",
+    "Day and Phonics navigate correctly; logo returns to choice screen and phonics remains lists only"
+  ],
+  "errors": []
+}
