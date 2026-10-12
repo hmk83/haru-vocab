@@ -71,3 +71,5 @@ header{position:sticky;top:0;z-index:20;max-width:none;width:100%;height:calc(va
 .phonics-syllables .phonics-group{justify-content:center;min-height:150px}.phonics-syllables .phonics-group span{font-size:18px;overflow-wrap:anywhere}@media(max-width:640px){.phonics-syllables .phonics-group{min-height:120px}.phonics-syllables .phonics-group span{font-size:16px}}
 
 .study-view .phonics-session .phonics-pair{gap:24px}.study-view .phonics-session .question{font-size:clamp(60px,8vw,110px);line-height:1.2}.phonics-hangul{font-size:clamp(60px,8vw,100px);font-weight:700;line-height:1.3;color:#356967}@media(max-width:640px){.study-view .phonics-session .question{font-size:clamp(46px,14vw,68px)}.phonics-hangul{font-size:64px}}@media(max-height:450px){.study-view .phonics-session .phonics-pair{gap:10px}.study-view .phonics-session .question,.phonics-hangul{font-size:40px}}
+
+.phonics-view main{padding-bottom:32px}
