@@ -19,3 +19,5 @@ The follow-up public deployment `55d03214836b72c267a76a4cb0df8255d65dcefd` succe
 ## Follow-up: direct, bilingual flashcards
 
 Phonics starts immediately without a Hangul/romanization picker. Every card shows its Latin text above Hangul; no reveal, audio or grading control is present. Next remains at the bottom. The 10-check local harness passed, including paired text content/order, direct entry, reload recovery, independent-browser completion synchronization and Day regression checks across the five viewports.
+
+Direct bilingual cards deployed as `865c985670cb45e2d8b1eca9a7099796a3c2c0f1` in successful Pages run [38211424920](https://github.com/hmk83/haru-vocab/actions/runs/38211424920). All 10 updated checks passed on the public site (`qa/phonics-results-public.json`).
