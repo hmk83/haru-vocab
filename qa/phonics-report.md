@@ -15,3 +15,7 @@ Public deployment: source commit `0b9db1dde33342ee7b6d024b1b894e1d291e1d0a`, Git
 Removed listening controls from all phonics list/study screens. Each consonant's syllables now use the same grid-card presentation as the preceding consonant list (3 columns on mobile, 4 on tablet, 5 on desktop). Day listening remains available. The updated local harness passed all 10 checks, including first/second card geometry on each device width, absence of phonics listening, and Day listening preservation.
 
 The follow-up public deployment `55d03214836b72c267a76a4cb0df8255d65dcefd` succeeded in Pages run [38210342141](https://github.com/hmk83/haru-vocab/actions/runs/38210342141). All 10 updated harness checks passed against the public site, recorded in `qa/phonics-results-public.json`.
+
+## Follow-up: direct, bilingual flashcards
+
+Phonics starts immediately without a Hangul/romanization picker. Every card shows its Latin text above Hangul; no reveal, audio or grading control is present. Next remains at the bottom. The 10-check local harness passed, including paired text content/order, direct entry, reload recovery, independent-browser completion synchronization and Day regression checks across the five viewports.

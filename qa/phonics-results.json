@@ -1,11 +1,11 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-12T05:58:38.286Z",
+  "time": "2026-10-12T06:12:03.836Z",
   "checks": [
     "Entry title, two bottom menus, 50 Days and 14 ordered consonants",
     "654 cards, stable unique IDs and chart correction checks",
     "Every consonant list renders its full chart",
-    "Ungraded reveal, next-card flow and reload persistence",
+    "Direct entry without language selection, both scripts visible, ungraded next-card flow and reload persistence",
     "Back confirmation returns to the current consonant list",
     "Completed viewing synchronizes across independent browsers without scores or mastery events",
     "Restart retains consonant and reshuffles all cards",
