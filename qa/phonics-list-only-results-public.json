@@ -1,0 +1,11 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-12T06:21:05.355Z",
+  "checks": [
+    "14 consonant lists retain all 654 cards with no flashcard or listening controls",
+    "Phone, tablet and desktop retain multi-column lists without overflow",
+    "Old phonics drafts return to lists; completed records remain readable without restart",
+    "Day flashcards and listening remain available"
+  ],
+  "errors": []
+}
