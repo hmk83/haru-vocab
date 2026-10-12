@@ -1,0 +1,18 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-12T05:55:30.251Z",
+  "checks": [
+    "Entry title, two bottom menus, 50 Days and 14 ordered consonants",
+    "654 cards, stable unique IDs and chart correction checks",
+    "Every consonant list renders its full chart",
+    "Ungraded reveal, next-card flow and reload persistence",
+    "Back confirmation returns to the current consonant list",
+    "Completed viewing synchronizes across independent browsers without scores or mastery events",
+    "Restart retains consonant and reshuffles all cards",
+    "iPhone mini, tablet and desktop: no horizontal overflow; study fills viewport with lower Next button",
+    "Korean consonant audio loads and decodes",
+    "Day grading, neutral reveal, shared score, ALL toggle and Day-only test pools remain functional"
+  ],
+  "errors": [],
+  "isolatedTestNamespace": true
+}

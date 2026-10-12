@@ -7,3 +7,5 @@ Local harness: `qa/phonics-harness.cjs` passed 10 checks (`qa/phonics-results.js
 The existing `qa/shared-sync-harness.cjs` also passed 10 regression checks after the record validator/seed change, including private-to-shared migration, flash/quiz/written shared scores, automatic polling, offline recovery and shared reset propagation. Both harnesses use independent randomly generated test namespaces; the real public learner's records are never reset or populated by tests.
 
 Source transcription/corrections: `qa/phonics-source-review.md`.
+
+Public deployment: source commit `0b9db1dde33342ee7b6d024b1b894e1d291e1d0a`, GitHub Pages run [38210004948](https://github.com/hmk83/haru-vocab/actions/runs/38210004948) succeeded. The same 10-check phonics harness passed against https://hmk83.github.io/haru-vocab/ (`qa/phonics-results-public.json`), including deployed Korean audio decoding and independent-browser Supabase completion retrieval. All 654 generated M4A files were also checked locally for nonempty MP4 container/media content before upload.
