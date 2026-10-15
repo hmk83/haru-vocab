@@ -1,12 +1,13 @@
 {
   "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-15T02:12:01.221Z",
+  "time": "2026-10-15T02:21:56.251Z",
   "audit": {
     "words": 1000,
     "cases": 9082,
     "failures": []
   },
   "checks": [
+    "Academy vocabulary file is byte-for-byte unchanged",
     "1000 words: 9082 full, individual meaning, Unicode and case checks",
     "Independent comma, annotation, Korean/English bracket fixtures and incorrect/partial answer rejection",
     "All 2,000 multiple-choice prompts have four distinct non-overlapping answers",
