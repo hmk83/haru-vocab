@@ -88,6 +88,12 @@ function revealFlash(){if(!session||session.mode!=='flash'||session.chosen!==nul
 function choose(id){if(!session||session.mode!=='quiz'||session.chosen!==null||!session.options?.includes(id))return;const target=WORDS.find(w=>w.id===session.ids[session.index]),selected=WORDS.find(w=>w.id===id);if(!target||!selected)return;const correct=equivalentChoice(target,selected,session.direction);session.chosen=id;rememberAnswer(target.id,correct);session.answers.push({id:target.id,correct,selected:id});draft();renderSession()}
 function normalizeAnswer(value){return String(value).normalize('NFKC').toLowerCase().replace(/[\s\p{P}\p{S}]/gu,'')}
 function splitMeanings(value){const parts=[];let start=0,depth=0;for(let i=0;i<value.length;i++){if('[(（［'.includes(value[i]))depth++;else if('])）］'.includes(value[i]))depth=Math.max(0,depth-1);else if(depth===0&&/[,;，；]/.test(value[i])){parts.push(value.slice(start,i));start=i+1}}parts.push(value.slice(start));return parts;}
+// Reviewed expansions of the academy's abbreviated Korean endings. Displayed data stays intact.
+const bracketEndingExpansions=new Map([
+ ['위에[로]','위로'],
+ ['되돌아가서[와서]','되돌아와서'],
+ ['따라가다[오다]','따라오다']
+]);
 const answerVariantCache=new Map();
 function answerVariants(value){
  if(answerVariantCache.has(value))return answerVariantCache.get(value);
@@ -105,7 +111,8 @@ function answerVariants(value){
     else if(before.trim()){
      // Inline brackets replace the preceding word/stem; leading brackets are context labels.
      const stem=before.replace(/[\p{L}\p{N}’'-]+\s*$/u,'');
-     for(const alt of splitMeanings(inside))next.push(stem+alt.trim()+after);
+     const word=before.slice(stem.length).trim();
+     for(const alt of splitMeanings(inside)){const replacement=bracketEndingExpansions.get(word+'['+alt.trim()+']')??alt.trim();next.push(stem+replacement+after);}
     }
    }
    expanded=[...new Set(next)];if(!changed)break;
@@ -115,7 +122,7 @@ function answerVariants(value){
  // Ellipsis marks an omitted object. Accept meanings with and without its attached particle.
  const result=[...new Set(variants.flatMap(text=>[text,text.replace(/(?:…|\.{3})(?:에게|으로|에서|을|를|에|의|와|로)?/g,'')]).map(normalizeAnswer).filter(Boolean))];answerVariantCache.set(value,result);return result;
 }
-function matchesAnswer(w,direction,value){const variants=[...answerVariants(direction==='en'?w.ko:w.en)];if(direction==='ko'&&w.en.includes('to-v'))variants.push(normalizeAnswer(w.en.replace('to-v','to')));const answer=normalizeAnswer(value);return !!answer&&variants.includes(answer)}
+function matchesAnswer(w,direction,value){const variants=[...answerVariants(direction==='en'?w.ko:w.en)];if(direction==='ko'&&w.en.includes('to-v'))variants.push(normalizeAnswer(w.en.replace('to-v','to')));const answer=normalizeAnswer(value);if(!answer)return false;if(variants.includes(answer))return true;const supplied=splitMeanings(String(value).normalize('NFKC')).map(normalizeAnswer).filter(Boolean);return supplied.length>1&&supplied.every(part=>variants.includes(part))}
 function equivalentChoice(w,other,direction){const field=direction==='en'?'ko':'en',accepted=new Set(answerVariants(w[field]));return w.id===other.id||answerVariants(other[field]).some(value=>accepted.has(value))}
 function submitWritten(value){if(!session||session.mode!=='written'||session.chosen!==null)return;if(!value.trim()){toast('답을 입력해 줘.');return}const id=session.ids[session.index],w=WORDS.find(w=>w.id===id),correct=matchesAnswer(w,session.direction,value);session.typed=value.trim();session.chosen=correct?id:-1;rememberAnswer(id,correct);session.answers.push({id,correct,typed:session.typed});draft();document.querySelector('#written-answer')?.blur();renderSession();syncWrittenViewport()}
 function revealWritten(){if(!session||session.mode!=='written'||session.chosen!==null)return;const id=session.ids[session.index];session.chosen=-1;session.revealed=true;session.answers.push({id,correct:false,typed:session.typed||'',revealed:true});rememberAnswer(id,false);draft();document.querySelector('#written-answer')?.blur();renderSession();syncWrittenViewport()}
