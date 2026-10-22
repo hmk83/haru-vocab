@@ -1,0 +1,14 @@
+{
+  "commit": "e2028b02377aa61f6d4185b02756829c17368898",
+  "time": "2026-10-22T03:10:26.218Z",
+  "hashes": {
+    "index.html": "61606df71fe25a8938e7f9ce0252c3efb8288bf58ac5a8555a87403f38504192",
+    "ox-looks.js": "ad0697bbef8b2e45bd6650e0e0b303335b1a7f067bb49d0efd6e76698c6f1b22",
+    "ox-catalog.js": "1c027e8d128af7efe2a1631550af7abb45d5429a57b2454b9ca0f337e0ad161f",
+    "ox-game.js": "e226f047ee892e6dce665a5593fe7bfccaff09bd4c07abdf34fb06d0c7fbdc54",
+    "ox-game.css": "b2ab6d2288fd0c673eacdbe9c1d44f7797e12e1e8fb4dfc4be7e4d8d41c992d2",
+    "ox-wardrobe.css": "2a50ac345342f1df7b447eb06b634df753e1eb67c00923f34009aeb382d45c49",
+    "ox-points.js": "ab258ac97ecc2753c1cc4345314e7a6c8415a52a2d0f90f9bae05687df95ae57",
+    "data.js": "ec9966d9492ba552080bae55ba7a3e2dd10aae6993ff2246b035f92178068ee1"
+  }
+}

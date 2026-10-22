@@ -1,0 +1,16 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-22T03:10:41.151Z",
+  "checks": [
+    "Ten categories, 270 fixed-price items and 30 themed costume meshes; theme filters and persistent collection goal work",
+    "Earned 9,000P from three Days; buying nine categories charges 1,000P each, duplicate buys stay free, and unowned equipment is rejected",
+    "Eyes, nose and mouth save independently at zero balance; all free choices and invalid-parameter guards work",
+    "A fresh mobile browser restores all purchased equipment and all three free facial selections",
+    "Back icon centered to within one pixel; headings, category controls, previews and purchase buttons fit eight phone/tablet/PC viewports",
+    "Purchased costume, hat, glasses, wings, necklace, shoes and facial expression appear together on the actual game avatar",
+    "No browser errors; original academy vocabulary remains byte-for-byte unchanged"
+  ],
+  "errors": [],
+  "isolatedCloudProfile": true,
+  "physicalDeviceTested": false
+}
