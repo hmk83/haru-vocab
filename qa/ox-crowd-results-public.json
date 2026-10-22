@@ -1,7 +1,11 @@
 {
   "base": "https://hmk83.github.io/haru-vocab",
-  "report": "Deterministic survival and opposite finalists verified for 1, 2, 10, 30 and 100 questions",
+  "report": {
+    "correctMajority": 291,
+    "wrongMajority": 312,
+    "checkedGames": 320
+  },
   "initial": 24,
   "errors": [],
-  "time": "2026-10-22T03:10:16.287Z"
+  "time": "2026-10-22T04:13:01.961Z"
 }
