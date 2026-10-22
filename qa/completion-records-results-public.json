@@ -1,0 +1,19 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-22T02:37:16.448Z",
+  "checks": [
+    "20-card flash completion automatically records exactly one ungraded session; reload, Day count and result reopening preserve it without mastery changes",
+    "A second fully completed flash session increases the count by exactly one",
+    "Quiz/written save on the final answer before dismissing feedback; reload and result navigation cannot double-count",
+    "Completion counts regardless of correctness; an unfinished session does not increase the count",
+    "The 30-card selected-Day test also saves one ungraded completion",
+    "An independent mobile browser reads all completion records, including an offline flash completion after reconnect",
+    "A blocked save retains the completed draft; reload recovers it once automatically",
+    "PC landscape exposes O/X with mouse controls; server-ended O/X automatically saves exactly one shared completion",
+    "Wardrobe opens on phone portrait/landscape, tablet portrait/landscape and PC; all 150 items and purchase controls fit seven sizes",
+    "Academy source is unchanged and no browser errors occurred"
+  ],
+  "errors": [],
+  "isolatedCloudTestNamespace": true,
+  "physicalDeviceTested": false
+}
