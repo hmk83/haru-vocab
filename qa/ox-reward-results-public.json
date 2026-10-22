@@ -1,0 +1,51 @@
+{
+  "base": "https://hmk83.github.io/haru-vocab",
+  "time": "2026-10-22T02:19:58.952Z",
+  "checks": [
+    "Game/wardrobe entry appears only on a landscape touch tablet; existing phone/portrait/desktop modes remain intact",
+    "A Day uses all original words once, with a random order and balanced O/X; rotation preserves the same deck",
+    "Native touch/drag, sound, correct feedback and falling work; 17 correct then fail question 18/20 grants exactly 1,000P and ends the run",
+    "Reload / replay does not duplicate points or completed learning records",
+    "Real Supabase rewards: 1,000 → 500 → 2,000 → 500 → 1,000; clear rewards 3,000 and the highest record never falls",
+    "All five categories have 30 visually distinct options; buying each deducts exactly 1,000P and equips it, with comma-formatted numbers",
+    "Repeat purchase cannot double-charge and unowned items cannot be equipped",
+    "An independent browser reads the same points, all five equipped items and the scored O/X learning record from Supabase",
+    "Purchased hair, skin, clothing, hand item and face appear on the next game character",
+    "Mute prevents feedback/movement audio and remains muted after reload",
+    "All 1,000 academy prompts fit five landscape tablet viewports",
+    "Wardrobe catalog scrolls inside the screen; preview and purchase controls remain visible at four tablet sizes",
+    "A committed answer with a lost response recovers once, while reduced-motion removes character/particle animation",
+    "Academy words and meanings are byte-for-byte unchanged"
+  ],
+  "layouts": [
+    {
+      "width": 960,
+      "height": 600,
+      "failures": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "failures": []
+    },
+    {
+      "width": 1133,
+      "height": 744,
+      "failures": []
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "failures": []
+    },
+    {
+      "width": 1366,
+      "height": 1024,
+      "failures": []
+    }
+  ],
+  "errors": [],
+  "isolatedCloudTestKey": true,
+  "physicalDeviceTested": false,
+  "actualSpeakerListeningTested": false
+}

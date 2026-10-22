@@ -30,7 +30,7 @@ window.VocabOX=(()=>{
   finally{restoring.delete(s.id);}
  }
  async function launch(day){
-  if(launching||!available())return;launching=true;const oldHash=location.hash;
+  if(launching||!available())return;unlockSound();launching=true;const oldHash=location.hash;
   let id=crypto.randomUUID();try{const pending=JSON.parse(localStorage.getItem('haru-ox-start-pending')||'null');if(pending?.day===day)id=pending.id;localStorage.setItem('haru-ox-start-pending',JSON.stringify({day,id}));}catch{}
   document.querySelectorAll('[data-mode="ox"]').forEach(b=>{b.disabled=true;b.textContent='준비 중…';});
   try{const data=await VocabPoints.request('start',{day,id});try{localStorage.removeItem('haru-ox-start-pending')}catch{}if(!available()||location.hash!==oldHash)return;
@@ -49,13 +49,15 @@ window.VocabOX=(()=>{
  }
  function sparkles(){return Array.from({length:16},(_,i)=>`<i style="--angle:${i*22.5}deg;--delay:${i%3*.07}s;--spark-color:${['#f0b746','#46a790','#ec7f73','#88b3d4'][i%4]}"></i>`).join('');}
  function feedback(w,r,correct,s){return `<div class="ox-feedback-copy"><strong>${correct?'정답! 잘했어!':'괜찮아, 함께 기억해 보자!'}</strong><p><b>${esc(w.en)}</b> <span>${esc(w.ko)}</span></p><small>이 짝은 ${r.expected?'O · 맞는 뜻이야':'X · 다른 단어의 뜻이야'}</small></div><button class="primary" data-action="next">${s.oxEnded?'포인트 확인':'다음 문제 →'}</button>`;}
+ // Resume on the touch gesture itself, before any network await (iPad/Safari autoplay policy).
+ function unlockSound(){if(!soundEnabled||document.hidden)return;try{const AudioCtor=window.AudioContext||window.webkitAudioContext;if(!AudioCtor)return;feedbackContext=feedbackContext||new AudioCtor();if(feedbackContext.state!=='running')feedbackContext.resume().catch(()=>{});}catch{}}
  function movementSound(){
   if(!soundEnabled||document.hidden)return;
   try{const AudioCtor=window.AudioContext||window.webkitAudioContext;if(!AudioCtor)return;feedbackContext=feedbackContext||new AudioCtor();const ctx=feedbackContext;ctx.resume().then(()=>{if(document.hidden||!soundEnabled)return;const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime;o.type='sine';o.frequency.setValueAtTime(180,t);o.frequency.exponentialRampToValueAtTime(330,t+.12);g.gain.setValueAtTime(.025,t);g.gain.exponentialRampToValueAtTime(.001,t+.16);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.18);o.onended=()=>{o.disconnect();g.disconnect();};}).catch(()=>{});}catch{}
  }
  async function choose(choice){
   if(answering||!available()||!session||session.mode!=='ox'||session.chosen!==null||document.querySelector('dialog[open]')||document.hidden)return;
-  const s=session,index=s.index,sessionId=s.id;answering=true;s.oxPending={index,choice};draft();
+  unlockSound();const s=session,index=s.index,sessionId=s.id;answering=true;s.oxPending={index,choice};draft();
   app.querySelectorAll('[data-ox-choice]').forEach(b=>b.disabled=true);
   try{
    const response=await VocabPoints.request('answer',{id:s.id,index,selected:choice==='o'});
@@ -77,7 +79,7 @@ window.VocabOX=(()=>{
  }
  function bind(s){
   app.querySelectorAll('[data-ox-choice]').forEach(button=>button.onclick=()=>choose(button.dataset.oxChoice));
-  app.querySelector('[data-ox-sound]').onclick=()=>{soundEnabled=!soundEnabled;try{localStorage.setItem('haru-vocab-sound',soundEnabled?'on':'off')}catch{}render(s);};
+  app.querySelector('[data-ox-sound]').onclick=()=>{soundEnabled=!soundEnabled;if(soundEnabled)unlockSound();try{localStorage.setItem('haru-vocab-sound',soundEnabled?'on':'off')}catch{}render(s);};
   const actor=app.querySelector('[data-ox-runner]'),arena=app.querySelector('[data-ox-arena]');
   actor.onpointerdown=e=>{if(s.chosen!==null||e.button!==0)return;e.preventDefault();actor.setPointerCapture(e.pointerId);drag={x:e.clientX,y:e.clientY,pointerId:e.pointerId};actor.classList.add('dragging');};
   actor.onpointermove=e=>{if(!drag||drag.pointerId!==e.pointerId)return;const bounds=arena.getBoundingClientRect(),x=Math.max(.16,Math.min(.84,(e.clientX-bounds.left)/bounds.width));actor.style.left=x*100+'%';};
