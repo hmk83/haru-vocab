@@ -1,5 +1,9 @@
 -- Add wardrobe categories and free independent facial features without changing balances or owned items.
 begin;
+alter table vocab_game.catalog drop constraint if exists catalog_price_check;
+alter table vocab_game.catalog alter column price set default 500;
+update vocab_game.catalog set price=500;
+alter table vocab_game.catalog add constraint catalog_price_check check(price=500);
 alter table vocab_game.catalog drop constraint if exists catalog_category_check;
 alter table vocab_game.catalog add constraint catalog_category_check check(category in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes'));
 insert into vocab_game.catalog(category,item_index) select category,n from unnest(array['hat','glasses','back','neck','shoes'])category cross join generate_series(1,30)n on conflict do nothing;
@@ -88,11 +92,11 @@ begin
   if v_category is null or v_category not in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes') or item is null or item not between 0 and 30 then raise exception '아이템을 확인해 주세요.';end if;
   if p_action='buy' and v_category<>'face' then
    if item=0 then raise exception '기본 캐릭터는 무료예요.';end if;
-   if not exists(select 1 from vocab_game.catalog c where c.category=v_category and c.item_index=item and c.price=1000)then raise exception '판매 중인 아이템이 아니에요.';end if;
+   if not exists(select 1 from vocab_game.catalog c where c.category=v_category and c.item_index=item and c.price=500)then raise exception '판매 중인 아이템이 아니에요.';end if;
    if not exists(select 1 from vocab_game.owned o where o.key_hash=k and o.category=v_category and o.item_index=item)then
-    if w.balance<1000 then raise exception '포인트가 부족해요. 1,000P가 필요해요.';end if;
+    if w.balance<500 then raise exception '포인트가 부족해요. 500P가 필요해요.';end if;
     insert into vocab_game.owned(key_hash,category,item_index)values(k,v_category,item);
-    update vocab_game.wallets set balance=balance-1000,version=version+1 where key_hash=k;
+    update vocab_game.wallets set balance=balance-500,version=version+1 where key_hash=k;
    end if;
   end if;
   if item<>0 and v_category<>'face' and not exists(select 1 from vocab_game.owned o where o.key_hash=k and o.category=v_category and o.item_index=item)then raise exception '먼저 구매한 아이템을 골라 주세요.';end if;

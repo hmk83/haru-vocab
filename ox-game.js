@@ -5,8 +5,11 @@ window.VocabOX=(()=>{
  const available=()=>landscape.matches;
  const reduced=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
  let landingTimer=null,drag=null,launching=false,answering=false;
- const confirmed=new Set(),restoring=new Set();
- function cancel(){clearTimeout(landingTimer);landingTimer=null;drag=null;}
+ const confirmed=new Set(),restoring=new Set(),crowdTimers=new Set();
+ const crowdPlans=new Map();
+ function stopCrowd(){crowdTimers.forEach(clearTimeout);crowdTimers.clear();}
+ function laterCrowd(fn,ms){const t=setTimeout(()=>{crowdTimers.delete(t);fn()},ms);crowdTimers.add(t);}
+ function cancel(){stopCrowd();clearTimeout(landingTimer);landingTimer=null;drag=null;}
  function syncScreen(){document.documentElement.classList.toggle('tablet-landscape',available());if(typeof session!=='undefined'&&session?.mode==='ox'&&location.hash==='#study')render(session);}
  landscape.addEventListener('change',syncScreen);
  window.addEventListener('resize',()=>{if(drag)drag=null;syncScreen();});
@@ -37,26 +40,50 @@ window.VocabOX=(()=>{
   }catch(e){if(location.hash===oldHash)toast(e.message);}
   finally{launching=false;document.querySelectorAll('[data-mode="ox"]').forEach(b=>{b.disabled=false;b.textContent='O·X 게임';});}
  }
- // Deterministic participants survive reloads without affecting server scoring.
+ // Pre-answer choices are independent of the correct side. Eliminated IDs never return.
  function crowd(s){
-  const total=s.ids.length,seed=[...s.id].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0);
-  return Array.from({length:24},(_,id)=>{
-   const rank=(id+(seed%24))%24;
-   const fall=rank<2?total-1:Math.floor((rank-2)*Math.max(1,total-1)/22);
-   return {id,fall,hair:1+(id*7+seed)%30,skin:1+(id*3+seed)%30};
-  }).filter(n=>n.fall>=s.index);
+  let plan=crowdPlans.get(s.id);
+  if(!plan){
+   let seed=[...s.id].reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,2166136261);
+   const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
+   let alive=Array.from({length:24},(_,id)=>({id,hair:1+Math.floor(random()*30),skin:1+Math.floor(random()*30)}));plan=[];
+   for(let round=0;round<s.ids.length;round++){
+    const order=[...alive];for(let i=order.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+    const n=order.length,majority=Math.floor(n/2)+Math.floor(random()*(Math.floor(n*.7)-Math.floor(n/2)+1));
+    const oCount=random()<.5?majority:n-majority;
+    const participants=order.map((p,i)=>({...p,side:n===1&&round<s.ids.length-1?s.oxRounds[round].expected:i<oCount}));
+    const slots={true:0,false:0};participants.forEach(p=>p.slot=slots[p.side]++);
+    plan.push(participants);alive=participants.filter(p=>p.side===s.oxRounds[round].expected);
+   }
+   crowdPlans.set(s.id,plan);if(crowdPlans.size>12)crowdPlans.delete(crowdPlans.keys().next().value);
+  }
+  return plan[s.index];
  }
- function crowdSide(s,n,selected){return s.index===s.ids.length-1?!selected:(n.fall===s.index?!s.oxRounds[s.index].expected:s.oxRounds[s.index].expected);}
+ function crowdSide(s,n,selected){return s.index===s.ids.length-1&&typeof selected==='boolean'?!selected:n.side;}
+ function crowdPosition(side,i){return {x:(side?24:76)+(i%6-2.5)*3.4,y:20+Math.floor(i/6)*9};}
  function crowdMarkup(s,answered,selected){
   const participants=crowd(s),alive=answered?participants.filter(n=>crowdSide(s,n,selected)===s.oxRounds[s.index].expected).length:participants.length;
   return `<span class="ox-crowd-count">컴퓨터 <b>${alive}</b>명 ${answered?'생존':'참가 중'}</span><div class="ox-crowd" aria-hidden="true">${participants.map((n,i)=>{
-   const side=crowdSide(s,n,selected),fall=answered&&side!==s.oxRounds[s.index].expected;
-   const x=answered?(side?24:76)+(i%6-2.5)*3.4:36+(i%6)*5.6;
-   return `<div class="ox-npc ${answered?(fall?'eliminated':'survived'):'waiting'}" data-npc="${n.id}" style="left:${x}%;bottom:${answered?20+Math.floor(i/6)*9:19+Math.floor(i/6)*11}%;--wander:${(i%2?1:-1)*(6+i%4)}px;--phase:-${i*.37}s"><span class="npc-number">${String(n.id+1).padStart(2,'0')}</span>${VocabStyle.avatar(cube,{hair:n.hair,skin:n.skin})}<span class="ox-shadow"></span></div>`;
+   const side=crowdSide(s,n,answered?selected:null),fall=answered&&side!==s.oxRounds[s.index].expected,pos=crowdPosition(side,s.index===s.ids.length-1&&answered?i:n.slot);
+   return `<div class="ox-npc ${answered?(fall?'eliminated':'survived'):'waiting'}" data-npc="${n.id}" data-side="${side?'o':'x'}" style="left:${answered?pos.x:36+(i%6)*5.6}%;bottom:${answered?pos.y:19+Math.floor(i/6)*11}%;--wander:${(i%2?1:-1)*(6+i%4)}px;--phase:-${i*.37}s"><span class="npc-number">${String(n.id+1).padStart(2,'0')}</span>${VocabStyle.avatar(cube,{hair:n.hair,skin:n.skin})}<span class="ox-shadow"></span></div>`;
   }).join('')}</div>`;
  }
  function moveCrowd(s,selected){
-  crowd(s).forEach((n,i)=>{const el=app.querySelector(`[data-npc="${n.id}"]`);if(!el)return;el.classList.remove('waiting');el.classList.add('walking');el.style.left=((crowdSide(s,n,selected)?24:76)+(i%6-2.5)*3.4)+'%';el.style.bottom=(20+Math.floor(i/6)*9)+'%';});
+  stopCrowd();crowd(s).forEach((n,i)=>{const el=app.querySelector(`[data-npc="${n.id}"]`);if(!el)return;const pos=crowdPosition(crowdSide(s,n,selected),s.index===s.ids.length-1?i:n.slot);el.classList.remove('waiting');el.classList.add('walking');el.style.left=pos.x+'%';el.style.bottom=pos.y+'%';});
+ }
+ function startCrowd(s){
+  if(s.chosen!==null)return;const index=s.index,participants=crowd(s);
+  const active=()=>session===s&&s.index===index&&s.chosen===null&&location.hash==='#study'&&!answering;
+  participants.forEach((n,i)=>{
+   const walk=(first=false)=>{
+    if(!active())return;const el=app.querySelector(`[data-npc="${n.id}"]`);if(!el)return;
+    const pos=crowdPosition(n.side,n.slot);el.classList.remove('waiting');el.classList.add('walking');el.dataset.departed='true';
+    el.style.left=(pos.x+(first?0:(Math.random()-.5)*4))+'%';el.style.bottom=(pos.y+(first?0:(Math.random()-.5)*5))+'%';
+    if(reduced()){el.classList.remove('walking');return;}
+    laterCrowd(()=>{if(!active())return;el.classList.remove('walking');laterCrowd(()=>walk(),800+Math.random()*2400)},720);
+   };
+   if(reduced())walk(true);else laterCrowd(()=>walk(true),150+i*130+Math.random()*90);
+  });
  }
  function render(s){
   cancel();document.body.className='ox-view';
@@ -65,7 +92,7 @@ window.VocabOX=(()=>{
   const r=s.oxRounds[s.index],w=WORDS.find(x=>x.id===r.id),meaning=WORDS.find(x=>x.id===r.meaningId),answered=s.chosen!==null;
   const correct=answered?s.answers.at(-1).correct:null,selected=s.chosen==='o';
   app.innerHTML=`<section class="ox-game" aria-label="영어 O·X 게임"><div class="ox-topbar"><button class="ox-back" data-action="leave-study" aria-label="학습 나가기">←</button><div><span class="ox-eyebrow">O · X CHALLENGE</span><h1>${studyLabel(s)} <em>O·X 게임</em></h1></div><div class="ox-game-stats"><button class="ox-closet" data-open-wardrobe>꾸미기 <b data-wallet-balance>${VocabPoints.format(VocabPoints.wallet.balance)}P</b></button><span>${s.index+1}<small> / ${s.ids.length}</small></span><button data-ox-sound aria-label="${soundEnabled?'소리 끄기':'소리 켜기'}" aria-pressed="${!soundEnabled}">${soundEnabled?'♪':'♪̸'}</button></div></div><div class="ox-progress" role="progressbar" aria-label="진행" aria-valuenow="${s.index}" aria-valuemin="0" aria-valuemax="${s.ids.length}"><i style="width:${s.index/s.ids.length*100}%"></i></div><div class="ox-question"><span class="ox-question-label">단어와 뜻이 맞을까?</span><div class="ox-english" lang="en">${esc(w.en)}</div><div class="ox-meaning" lang="ko">${esc(meaning.ko)}</div></div><div class="ox-arena ${answered?'answered '+(correct?'win':'miss'):''}" data-ox-arena><div class="ox-cloud cloud-one"></div><div class="ox-cloud cloud-two"></div><div class="ox-horizon"></div><div class="ox-track"></div><button class="ox-platform ox-platform-o ${answered&&r.expected?'expected':''}" data-ox-choice="o" aria-label="O, 단어와 뜻이 맞아요" ${answered?'disabled':''}><span>O</span><small>맞아요</small></button><button class="ox-platform ox-platform-x ${answered&&!r.expected?'expected':''}" data-ox-choice="x" aria-label="X, 단어와 뜻이 달라요" ${answered?'disabled':''}><span>X</span><small>달라요</small></button><div class="ox-start-pad"></div>${crowdMarkup(s,answered,selected)}<div class="ox-runner ${answered?(correct?'cheering':'falling'):'waiting'}" style="left:${answered?(selected?24:76):50}%" role="img" aria-label="나의 블록 캐릭터" data-ox-runner><span class="ox-me">나</span>${avatar()}<span class="ox-shadow"></span></div><div class="ox-particles" aria-hidden="true">${answered&&correct?sparkles():''}</div></div><div class="ox-bottom ${answered?'is-feedback '+(correct?'good':'bad'):''}" aria-live="polite">${answered?feedback(w,r,correct,s):'<span class="ox-touch-hint"><i aria-hidden="true">↔</i> O·X 발판을 누르거나 캐릭터를 끌어줘</span><span class="ox-hint-sub">맞으면 왼쪽 O · 다르면 오른쪽 X</span>'}</div></section>`;
-  bind(s);
+  bind(s);startCrowd(s);
  }
  function sparkles(){return Array.from({length:16},(_,i)=>`<i style="--angle:${i*22.5}deg;--delay:${i%3*.07}s;--spark-color:${['#f0b746','#46a790','#ec7f73','#88b3d4'][i%4]}"></i>`).join('');}
  function feedback(w,r,correct,s){return `<div class="ox-feedback-copy"><strong>${correct?'정답! 잘했어!':'괜찮아, 함께 기억해 보자!'}</strong><p><b>${esc(w.en)}</b> <span>${esc(w.ko)}</span></p><small>이 짝은 ${r.expected?'O · 맞는 뜻이야':'X · 다른 단어의 뜻이야'}</small></div><button class="primary" data-action="next">${s.oxEnded?'포인트 확인':'다음 문제 →'}</button>`;}
@@ -77,7 +104,7 @@ window.VocabOX=(()=>{
  }
  async function choose(choice){
   if(answering||!available()||!session||session.mode!=='ox'||session.chosen!==null||document.querySelector('dialog[open]')||document.hidden)return;
-  unlockSound();const s=session,index=s.index,sessionId=s.id;answering=true;s.oxPending={index,choice};draft();
+  unlockSound();const s=session,index=s.index,sessionId=s.id;answering=true;stopCrowd();s.oxPending={index,choice};draft();
   app.querySelectorAll('[data-ox-choice]').forEach(b=>b.disabled=true);
   try{
    const response=await VocabPoints.request('answer',{id:s.id,index,selected:choice==='o'});

@@ -41,7 +41,7 @@ window.VocabStyle=(()=>{
  const noses=['작은 코','동그란 코','삼각 코','버튼 코','강아지 코','고양이 코','주근깨 코','코 없음'];
  const mouths=['작은 미소','활짝 웃음','차분한 입','놀란 입','장난 미소','치아 미소','고양이 입','씩 웃기','휘파람','혀 내밀기','하트 입','일자 입'];
  const faceParts=[{id:'eyes',name:'눈',names:eyes},{id:'nose',name:'코',names:noses},{id:'mouth',name:'입',names:mouths}];
- const items=categories.filter(c=>!c.free).flatMap(c=>Array.from({length:30},(_,i)=>({category:c.id,index:i+1,price:1000,...(VocabLooks.catalog[c.id]?.[i]||{}),name:c.id==='hair'?hairShapes[Math.floor(i/6)]+' · '+bangs[i%6]:c.id==='skin'?'스킨 톤 '+String(i+1).padStart(2,'0'):c.id==='hand'?handNames[i]:VocabLooks.catalog[c.id][i].name})));
+ const items=categories.filter(c=>!c.free).flatMap(c=>Array.from({length:30},(_,i)=>({category:c.id,index:i+1,price:500,...(VocabLooks.catalog[c.id]?.[i]||{}),name:c.id==='hair'?hairShapes[Math.floor(i/6)]+' · '+bangs[i%6]:c.id==='skin'?'스킨 톤 '+String(i+1).padStart(2,'0'):c.id==='hand'?handNames[i]:VocabLooks.catalog[c.id][i].name})));
  const partIndex=(look,part)=>Number.isInteger(look[part])?look[part]:part==='eyes'?(look.face?((look.face-1)%6):0):part==='mouth'?(look.face?Math.floor((look.face-1)/6):0):0;
  function face(look={}){
   const e=partIndex(look,'eyes')%12,n=partIndex(look,'nose')%8,m=partIndex(look,'mouth')%12;

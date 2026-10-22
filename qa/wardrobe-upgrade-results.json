@@ -1,10 +1,10 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-22T03:06:14.315Z",
+  "time": "2026-10-22T04:11:30.773Z",
   "checks": [
     "Ten categories, 270 fixed-price items and 30 themed costume meshes; theme filters and persistent collection goal work",
-    "Earned 9,000P from three Days; buying nine categories charges 1,000P each, duplicate buys stay free, and unowned equipment is rejected",
-    "Eyes, nose and mouth save independently at zero balance; all free choices and invalid-parameter guards work",
+    "Earned 9,000P from three Days; buying nine categories charges 500P each, duplicate buys stay free, and unowned equipment is rejected",
+    "Eyes, nose and mouth save independently without charges; all free choices and invalid-parameter guards work",
     "A fresh mobile browser restores all purchased equipment and all three free facial selections",
     "Back icon centered to within one pixel; headings, category controls, previews and purchase buttons fit eight phone/tablet/PC viewports",
     "Purchased costume, hat, glasses, wings, necklace, shoes and facial expression appear together on the actual game avatar",

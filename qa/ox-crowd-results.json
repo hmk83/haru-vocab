@@ -1,7 +1,11 @@
 {
   "base": "http://127.0.0.1:8873",
-  "report": "Deterministic survival and opposite finalists verified for 1, 2, 10, 30 and 100 questions",
+  "report": {
+    "correctMajority": 291,
+    "wrongMajority": 312,
+    "checkedGames": 320
+  },
   "initial": 24,
   "errors": [],
-  "time": "2026-10-22T03:09:05.016Z"
+  "time": "2026-10-22T04:12:04.455Z"
 }
