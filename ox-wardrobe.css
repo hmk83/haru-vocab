@@ -10,3 +10,17 @@
 @media(prefers-reduced-motion:reduce){.ox-runner.falling{animation:none;opacity:.35}.wardrobe *{transition:none!important}}
 
 .base-hair .ox-hair{--w:43px;--h:10px;left:15px}.base-hair .ox-fringe{--w:16px;--h:7px;left:15px;top:12px}.base-face .ox-eye{width:3px;height:5px}.base-face .ox-smile{width:6px;height:2px;left:20px;top:29px;border:0;background:#a4614c}
+
+@media(max-width:740px){
+ .wardrobe-view main{padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+ .wardrobe-bar{gap:9px;min-height:48px;padding-bottom:10px}.wardrobe-bar h1{font-size:18px}.wardrobe-bar>button{width:36px;height:36px;flex-shrink:0}
+ .shop-balance{font-size:10px;text-align:right}.shop-balance b{display:block;font-size:17px;margin:2px 0 0}
+ .wardrobe-layout{display:flex;flex-direction:column;gap:12px}.wardrobe-preview{display:grid;grid-template-columns:105px minmax(0,1fr);gap:5px 8px;padding:12px;flex-shrink:0;border-radius:18px;overflow:hidden}
+ .wardrobe-preview>.ox-eyebrow,.wardrobe-pedestal{display:none}.wardrobe-avatar{grid-column:1;grid-row:1/5;height:150px;width:100px;margin:0}.wardrobe-avatar .ox-avatar{transform:scale(.9)}
+ .wardrobe-preview h2{grid-column:2;grid-row:1;font-size:16px;margin:0;text-align:left}.wardrobe-preview>p{grid-column:2;grid-row:2;text-align:left;font-size:11px;min-height:0;margin:0}
+ .wardrobe-preview .shop-purchase{grid-column:2;grid-row:3;min-height:44px;font-size:12px}.wardrobe-preview .shop-note{grid-column:2;grid-row:4;font-size:10px;margin:0}
+ .wardrobe-preview>small{grid-column:1/-1;font-size:9px}.wardrobe-collection{flex:1}.shop-categories{gap:4px;margin-bottom:8px}.shop-categories button{min-height:44px;font-size:11px;padding:8px 3px;border-radius:10px}
+ .shop-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.shop-item{min-height:157px}.shop-item-preview{height:100px}.shop-item-preview .ox-avatar{transform:scale(.65)}
+ .day-toolbar:has(.ox-wardrobe-day){flex-wrap:wrap;gap:8px}.day-toolbar .ox-wardrobe-day{padding:8px;font-size:11px;gap:5px}.day-navigation{margin-left:auto}
+}
+@media(max-width:740px) and (max-height:500px){.wardrobe-view main{height:auto;min-height:100dvh}.shop-items{overflow:visible}}

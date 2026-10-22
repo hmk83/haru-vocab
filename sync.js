@@ -7,7 +7,7 @@ window.VocabCloud=(()=>{
  const unique=items=>[...new Map(items.map(x=>[x.id,x])).values()];
  const notify=()=>{document.querySelectorAll('[data-sync-status]').forEach(el=>el.textContent=status)};
  const setStatus=t=>{status=t;notify()};
- const valid=r=>r&&typeof r.id==='string'&&Array.isArray(r.answers)&&(Number.isFinite(r.score)||(r.kind==='phonics'&&r.score===null))&&Number.isFinite(Date.parse(r.finishedAt));
+ const valid=r=>r&&typeof r.id==='string'&&Array.isArray(r.answers)&&(Number.isFinite(r.score)||((r.kind==='phonics'||r.mode==='flash')&&r.score===null))&&Number.isFinite(Date.parse(r.finishedAt));
  async function request(table,method='GET',body=null,query=''){
   const response=await fetch(C.url+'/rest/v1/'+table+query,{method,headers:{apikey:C.key,'x-vocab-key':key,'Content-Type':'application/json',Prefer:'resolution=ignore-duplicates,return=minimal'},body:body?JSON.stringify(body):null,signal:AbortSignal.timeout(15000)});
   if(!response.ok)throw Error('동기화 실패 ('+response.status+')');return response.status===204||method!=='GET'?null:response.json();

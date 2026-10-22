@@ -1,8 +1,8 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-22T02:11:43.757Z",
+  "time": "2026-10-22T02:35:19.696Z",
   "checks": [
-    "Game/wardrobe entry appears only on a landscape touch tablet; existing phone/portrait/desktop modes remain intact",
+    "Game/wardrobe entry appears on landscape tablets and PCs; phone and portrait study modes remain intact",
     "A Day uses all original words once, with a random order and balanced O/X; rotation preserves the same deck",
     "Native touch/drag, sound, correct feedback and falling work; 17 correct then fail question 18/20 grants exactly 1,000P and ends the run",
     "Reload / replay does not duplicate points or completed learning records",
@@ -11,8 +11,10 @@
     "Repeat purchase cannot double-charge and unowned items cannot be equipped",
     "An independent browser reads the same points, all five equipped items and the scored O/X learning record from Supabase",
     "Purchased hair, skin, clothing, hand item and face appear on the next game character",
+    "Mute prevents feedback/movement audio and remains muted after reload",
     "All 1,000 academy prompts fit five landscape tablet viewports",
     "Wardrobe catalog scrolls inside the screen; preview and purchase controls remain visible at four tablet sizes",
+    "A committed answer with a lost response recovers once, while reduced-motion removes character/particle animation",
     "Academy words and meanings are byte-for-byte unchanged"
   ],
   "layouts": [

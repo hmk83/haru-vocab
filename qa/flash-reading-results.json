@@ -1,14 +1,14 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-12T06:44:49.690Z",
+  "time": "2026-10-22T02:34:42.607Z",
   "checks": [
     "Day flashcards use English, listening and one reveal/next control; reload preserves reveal without grading",
-    "Full 20-card completion creates no score, record, answer event or mastery change locally or in cloud",
-    "Repeat reshuffles all cards without score/history saving",
+    "Full 20-card completion saves one ungraded record locally and in cloud without answer events or mastery changes",
+    "Repeat reshuffles all cards without grading",
     "English above Korean; wide lower button and revealed text fit phone, tablet and desktop",
     "Legacy graded flash drafts resume as ungraded English cards without uploading answer events",
     "Quiz and written grading, score/history and independent-browser synchronization remain functional",
-    "30-card selected-stage flash test uses reveal/next without language picker or result records"
+    "30-card selected-stage flash test saves one completion without grading or a language picker"
   ],
   "errors": [],
   "isolatedTestNamespace": true
