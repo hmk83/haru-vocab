@@ -1,12 +1,13 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-15T02:20:37.799Z",
+  "time": "2026-10-22T02:11:07.101Z",
   "audit": {
     "words": 1000,
     "cases": 9082,
     "failures": []
   },
   "checks": [
+    "Academy vocabulary file is byte-for-byte unchanged",
     "1000 words: 9082 full, individual meaning, Unicode and case checks",
     "Independent comma, annotation, Korean/English bracket fixtures and incorrect/partial answer rejection",
     "All 2,000 multiple-choice prompts have four distinct non-overlapping answers",

@@ -37,3 +37,13 @@ Final mobile pairing layout was also checked on the published build after the CS
 Shared-mode regression: `qa/shared-sync-harness.cjs` uses a fresh, isolated shared test namespace, so its synthetic results and reset never affect real public history. It verifies automatic legacy migration, no pairing controls, all modes, automatic background refresh, offline recovery, reload and responsive settings.
 
 Current public shared mode: all 10 local and 10 deployed shared-mode harness checks passed; see `qa/shared-sync-report.md`.
+
+## OX point economy
+
+`game-setup.sql` creates the non-exposed `vocab_game` schema with six RLS-enabled tables, fixed 1,000-point catalog prices, server-issued random full-Day decks, step-by-step grading, and a per-Day high-water mark. `game-catalog-seed.sql` contains an exact copy of the academy dataset plus reviewed unrelated source-word distractor IDs. Apply the setup and seed together in a transaction; client deployment copies no SQL or private credentials.
+
+Only `public.vocab_game_action(text,jsonb)` is callable by the existing public-profile client. It verifies the same 64-hex `x-vocab-key` scope, locks the profile wallet for mutations, validates run order, awards at terminal states, and persists learning records/answer events. It runs as a narrowly scoped SECURITY DEFINER with an empty search path because granting browser UPDATE on wallets would allow balance tampering. The six internal tables and helper functions have no PUBLIC/anon/authenticated grants. This is the previously chosen public shared profile model, not per-person authentication or private personal balances.
+
+Each game receives a UUID; answer replays return their stored outcome, contradictory replays and skipped positions are rejected. The payout is based on the server's completed-correct count, not a client-supplied score, and the stored Day best only increases. History reset does not remove wallets, owned items or Day bests. Purchases/equipment are checked server-side and serialized on the same wallet, so duplicate purchases do not charge twice and negative balances are rejected. Client snapshots include a monotonically increasing version to avoid showing an older response over a newer wallet.
+
+Production installation was verified on 2026-10-22: 1,000 academy words, 150 catalog items, six RLS-enabled tables, no anon USAGE on the private schema, no anon UPDATE on wallets, and the scoped RPC available with an empty search path. Full browser tests use fresh random profile keys; normal shared user balances are not seeded or reset.

@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-22",
+  "project": "haru-vocab-sync",
+  "projectId": "tvaqnawrciznzebqbupf",
+  "academyWords": 1000,
+  "shopItems": 150,
+  "rlsEnabledTables": 6,
+  "anonPrivateSchemaUsage": false,
+  "anonDirectWalletUpdate": false,
+  "scopedRpcEnabled": true,
+  "tablesWithoutRls": 0,
+  "rpcSearchPath": "",
+  "scope": "existing explicit public shared x-vocab-key profile",
+  "evidenceScreenshot": "qa/ox-server-permissions.png"
+}

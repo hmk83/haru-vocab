@@ -22,7 +22,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir _site
-          cp index.html style.css app.js data.js phonics-data.js sync.js sync-config.js _site/
+          cp index.html style.css app.js ox-game.js ox-game.css ox-catalog.js ox-points.js ox-wardrobe.css data.js phonics-data.js sync.js sync-config.js _site/
           cp -r audio _site/
       - uses: actions/upload-pages-artifact@v3
         with:
