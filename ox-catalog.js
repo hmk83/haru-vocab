@@ -1,6 +1,6 @@
 'use strict';
 window.VocabStyle=(()=>{
- const categories=[{id:'hair',name:'머리모양'},{id:'skin',name:'피부'},{id:'outfit',name:'옷'},{id:'hand',name:'손 아이템'},{id:'face',name:'얼굴'}];
+ const categories=[{id:'outfit',name:'의상'},{id:'hair',name:'헤어'},{id:'hat',name:'모자'},{id:'glasses',name:'안경'},{id:'back',name:'등 장식'},{id:'neck',name:'목 장식'},{id:'hand',name:'손 아이템'},{id:'shoes',name:'신발'},{id:'skin',name:'피부'},{id:'face',name:'표정',free:true}];
  const skin=['#f3c6a3','#d99c73','#a87250','#805538','#f6dbc2','#edb68e','#be865e','#6c4835','#f0c8b2','#dcb196','#bc917a','#94725a','#e9bd91','#c89665','#a67d50','#7a5b3d','#f5d6be','#ddb593','#bd8b6b','#95684a','#edc1a9','#c7957f','#a57763','#795345','#f8dfcc','#e7bd9f','#cda084','#aa7a5e','#896247','#5f4433'];
  const colors=['#418f77','#4d80ad','#d28568','#8b70b1','#d1a444'];
  const handNames=['별빛 지팡이','모험가 검','동그란 방패','작은 책','횃불','깃발','우산','꽃 한 송이','마법봉','기타','풍선','당근','붓','로켓','아이스크림','연필','두루마리','망원경','막대사탕','망치','네잎클로버','하트','초승달','랜턴','응원봉','물고기','나뭇잎','보석','물병','카메라'];
@@ -37,13 +37,38 @@ window.VocabStyle=(()=>{
   '<path d="M2 8h8l3-5h9l3 5h5v21H2Z" fill="#97aaa7" stroke="#627d79"/><circle cx="17" cy="18" r="8" fill="#516b77"/><circle cx="17" cy="18" r="5" fill="#a1cdd8"/><path d="M5 12h3" stroke="#f4d68d" stroke-width="2"/>'
  ];
  const hairShapes=['숏컷','단발','포니테일','스파이크','양갈래'],bangs=['일자','사선','가르마','컬','레이어','올림'];
- const items=categories.flatMap(c=>Array.from({length:30},(_,i)=>({category:c.id,index:i+1,price:1000,name:c.id==='hair'?hairShapes[Math.floor(i/6)]+' · '+bangs[i%6]:c.id==='skin'?'피부 '+String(i+1).padStart(2,'0'):c.id==='outfit'?['별빛','스트라이프','체크','후드','메카','컬러블록'][Math.floor(i/5)]+' · '+['숲','바다','코랄','보라','골드'][i%5]:c.id==='hand'?handNames[i]:['또렷한','동그란','졸린','윙크','초롱한','웃는'][i%6]+' 눈 · '+['미소','활짝','차분','놀람','장난'][Math.floor(i/6)]})));
+ const eyes=['또렷한 눈','동그란 눈','초롱초롱','웃는 눈','윙크','졸린 눈','반달 눈','별빛 눈','당당한 눈','놀란 눈','감은 눈','하트 눈'];
+ const noses=['작은 코','동그란 코','삼각 코','버튼 코','강아지 코','고양이 코','주근깨 코','코 없음'];
+ const mouths=['작은 미소','활짝 웃음','차분한 입','놀란 입','장난 미소','치아 미소','고양이 입','씩 웃기','휘파람','혀 내밀기','하트 입','일자 입'];
+ const faceParts=[{id:'eyes',name:'눈',names:eyes},{id:'nose',name:'코',names:noses},{id:'mouth',name:'입',names:mouths}];
+ const items=categories.filter(c=>!c.free).flatMap(c=>Array.from({length:30},(_,i)=>({category:c.id,index:i+1,price:1000,...(VocabLooks.catalog[c.id]?.[i]||{}),name:c.id==='hair'?hairShapes[Math.floor(i/6)]+' · '+bangs[i%6]:c.id==='skin'?'스킨 톤 '+String(i+1).padStart(2,'0'):c.id==='hand'?handNames[i]:VocabLooks.catalog[c.id][i].name})));
+ const partIndex=(look,part)=>Number.isInteger(look[part])?look[part]:part==='eyes'?(look.face?((look.face-1)%6):0):part==='mouth'?(look.face?Math.floor((look.face-1)/6):0):0;
+ function face(look={}){
+  const e=partIndex(look,'eyes')%12,n=partIndex(look,'nose')%8,m=partIndex(look,'mouth')%12;
+  const eye=[
+   '<ellipse cx="13" cy="17" rx="2" ry="3"/><ellipse cx="31" cy="17" rx="2" ry="3"/>',
+   '<circle cx="13" cy="17" r="3"/><circle cx="31" cy="17" r="3"/>',
+   '<ellipse cx="13" cy="17" rx="3" ry="4"/><ellipse cx="31" cy="17" rx="3" ry="4"/><g fill="white"><circle cx="12" cy="15" r="1.2"/><circle cx="30" cy="15" r="1.2"/></g>',
+   '<path d="M10 18q3-7 6 0m12 0q3-7 6 0" fill="none" stroke="currentColor" stroke-width="2.3"/>',
+   '<circle cx="13" cy="17" r="2.4"/><path d="m28 16 6 2-6 2" fill="none" stroke="currentColor" stroke-width="2"/>',
+   '<path d="M10 17h6m12 0h6" stroke="currentColor" stroke-width="2.8"/>',
+   '<path d="M10 15q3 7 6 0m12 0q3 7 6 0" fill="none" stroke="currentColor" stroke-width="2"/>',
+   '<path d="m13 12 1.5 3 3.5.5-2.5 2.5.5 3.5-3-1.5-3 1.5.5-3.5L8 15.5l3.5-.5Zm18 0 1.5 3 3.5.5-2.5 2.5.5 3.5-3-1.5-3 1.5.5-3.5-2.5-2.5 3.5-.5Z" fill="#b58b26"/>',
+   '<path d="m9 12 8 2m10 0 8-2" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="18" r="2"/><circle cx="31" cy="18" r="2"/>',
+   '<ellipse cx="13" cy="17" rx="3" ry="4"/><ellipse cx="31" cy="17" rx="3" ry="4"/>',
+   '<path d="M9 16q4 5 8 0m10 0q4 5 8 0" fill="none" stroke="currentColor" stroke-width="2"/>',
+   '<path d="M13 21 8 16q-1-5 5-2 6-3 5 2Zm18 0-5-5q-1-5 5-2 6-3 5 2Z" fill="#cf6583"/>'
+  ][e];
+  const nose=['<path d="m22 20-1 3h3" fill="none" stroke="#b48264" stroke-width="1.2"/>','<circle cx="22" cy="22" r="1.6" fill="#b48264"/>','<path d="m22 19-2 4h4Z" fill="#b48264"/>','<ellipse cx="22" cy="22" rx="2.6" ry="1.7" fill="#c09175"/>','<path d="M18 21q4-3 8 0l-4 4Z"/>','<path d="m19 21 6 0-3 3Z" fill="#ca8994"/>','<g fill="#ae795a"><circle cx="17" cy="22" r=".8"/><circle cx="14" cy="23" r=".8"/><circle cx="27" cy="22" r=".8"/><circle cx="30" cy="23" r=".8"/></g>',''][n];
+  const mouth=['<path d="M18 28q4 4 8 0"/>','<path d="M17 27h10q-1 10-5 7-4 3-5-7Z" fill="#ac5861" stroke="none"/>','<path d="M19 29h6"/>','<ellipse cx="22" cy="29" rx="2.6" ry="3.8" fill="#a7655a" stroke="none"/>','<path d="M17 29q6 4 11-3"/>','<path d="M16 27h12q-1 8-6 7-5 1-6-7Z" fill="#fff7ee"/>','<path d="M16 28q3 5 6 0 3 5 6 0"/>','<path d="M17 29q7 3 11-2m-1-2 2 4"/>','<circle cx="23" cy="29" r="2"/>','<path d="M17 27h10q0 6-5 6-5 0-5-6Z" fill="#734d49"/><path d="M21 30h5v4q-3 4-5 0Z" fill="#dd8e96" stroke="none"/>','<path d="M22 32q-8-4-4-6 2-1 4 1 2-2 4-1 4 2-4 6Z" fill="#ca728c" stroke="none"/>','<path d="M17 29h10"/>'][m];
+  return `<svg class="avatar-face-art" viewBox="0 0 44 38" aria-hidden="true"><g fill="#3b3033" color="#3b3033">${eye}${nose}</g><g stroke="#915d59" stroke-width="1.6" fill="none" stroke-linecap="round">${mouth}</g></svg>`;
+ }
  function avatar(cube,look={}){
-  const hair=look.hair?look.hair-1:0,face=look.face?look.face-1:0,outfit=look.outfit?look.outfit-1:0;
-  const shape=Math.floor(hair/6),bang=hair%6,pattern=Math.floor(outfit/5),shirt=look.outfit?colors[outfit%5]:'#47937b',skinColor=look.skin?skin[look.skin-1]:'#ebbc91';
+  const hair=look.hair?look.hair-1:0,shape=Math.floor(hair/6),bang=hair%6,skinColor=look.skin?skin[look.skin-1]:'#ebbc91';
+  const suit=VocabLooks.outfits[look.outfit-1],shirt=suit?.color||'#47937b';
   let extras='';if(shape===1)extras=cube('sidehair-a')+cube('sidehair-b');if(shape===2)extras=cube('ponytail');if(shape===3)extras=Array.from({length:4},(_,i)=>`<span class="ox-spike spike-${i}">${cube('spike')}</span>`).join('');if(shape===4)extras=cube('bun-a')+cube('bun-b');
   const held=look.hand?`<span class="ox-held" aria-hidden="true"><svg viewBox="0 0 34 34">${icons[look.hand-1]}</svg></span>`:'';
-  return `<div class="ox-avatar ${look.hair?'':'base-hair'} ${look.face?'':'base-face'} hair-shape-${shape} bang-${bang} outfit-pattern-${pattern} face-eyes-${face%6} face-mouth-${Math.floor(face/6)}" style="--avatar-skin:${skinColor};--avatar-shirt:${shirt}"><div class="ox-rig">${cube('head','<b class="ox-eye a"></b><b class="ox-eye b"></b><b class="ox-smile"></b>')}${cube('hair')}${cube('fringe')}${extras}${cube('body','<b class="ox-star">✦</b><b class="ox-shirt-detail"></b>')}<span class="ox-joint ox-arm a">${cube('sleeve')}${cube('hand')}</span><span class="ox-joint ox-arm b">${cube('sleeve')}${cube('hand')}${held}</span><span class="ox-joint ox-leg a">${cube('pants')}${cube('shoe')}</span><span class="ox-joint ox-leg b">${cube('pants')}${cube('shoe')}</span></div></div>`;
+  return `<div class="ox-avatar ${look.hair?'':'base-hair'} hair-shape-${shape} bang-${bang} ${suit?'costume costume-'+suit.id:''} ${look.hat?'has-hat':''} ${look.shoes?'has-custom-shoes':''}" style="--avatar-skin:${skinColor};--avatar-shirt:${shirt};--suit-accent:${suit?.accent||'#f0cd65'};--suit-pants:${suit?.pants||'#415476'};--suit-boot:${suit?.boots||'#fff6dd'}"><div class="ox-rig">${cube('head',face(look))}${cube('hair')}${cube('fringe')}${extras}${cube('body',suit?VocabLooks.chest(suit):'<b class="ox-star">✦</b>')}<span class="ox-joint ox-arm a">${cube('sleeve')}${cube('hand')}</span><span class="ox-joint ox-arm b">${cube('sleeve')}${cube('hand')}${held}</span><span class="ox-joint ox-leg a">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span><span class="ox-joint ox-leg b">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span>${VocabLooks.details(cube,suit,look)}${VocabLooks.accessories(cube,look)}</div></div>`;
  }
- return {categories,items,avatar,icon:index=>`<svg viewBox="0 0 34 34" aria-hidden="true">${icons[index-1]||''}</svg>`};
+ return {categories,items,avatar,face,faceParts,partIndex,icon:index=>`<svg viewBox="0 0 34 34" aria-hidden="true">${icons[index-1]||''}</svg>`};
 })();

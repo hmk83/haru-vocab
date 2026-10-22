@@ -9,12 +9,14 @@ create table if not exists vocab_game.words (
  en text not null, ko text not null, distractors integer[] not null
 );
 create table if not exists vocab_game.catalog (
- category text not null check(category in ('hair','skin','outfit','hand','face')),
+ category text not null check(category in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes')),
  item_index integer not null check(item_index between 1 and 30),
  price integer not null default 1000 check(price=1000),primary key(category,item_index)
 );
+alter table vocab_game.catalog drop constraint if exists catalog_category_check;
+alter table vocab_game.catalog add constraint catalog_category_check check(category in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes'));
 insert into vocab_game.catalog(category,item_index)
- select category,n from unnest(array['hair','skin','outfit','hand','face'])category cross join generate_series(1,30)n
+ select category,n from unnest(array['hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes'])category cross join generate_series(1,30)n
  on conflict do nothing;
 create table if not exists vocab_game.wallets (
  key_hash text primary key references public.vocab_sync_profiles(key_hash),
@@ -134,10 +136,15 @@ begin
   update vocab_game.runs set cursor=r.cursor,answers=r.answers,status=r.status,correct_count=r.correct_count,
    base=r.base,award=r.award,improved=r.improved,finished_at=r.finished_at where id=r.id;
   return jsonb_build_object('run',vocab_game.run_view(r),'answer',entry,'wallet',vocab_game.snapshot(k),'replayed',false);
+ elsif p_action='face' then
+  v_category:=p_payload->>'part';item:=(p_payload->>'index')::integer;
+  if v_category is null or v_category not in ('eyes','nose','mouth') or item is null or item<0 or item>(case when v_category='nose' then 7 else 11 end) then raise exception '표정을 확인해 주세요.';end if;
+  update vocab_game.wallets set equipped=jsonb_set(equipped,array[v_category],to_jsonb(item)),version=version+1 where key_hash=k;
+  return jsonb_build_object('wallet',vocab_game.snapshot(k));
  elsif p_action in ('buy','equip') then
   v_category:=p_payload->>'category';item:=(p_payload->>'index')::integer;
-  if v_category is null or v_category not in ('hair','skin','outfit','hand','face') or item is null or item not between 0 and 30 then raise exception '아이템을 확인해 주세요.';end if;
-  if p_action='buy' then
+  if v_category is null or v_category not in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes') or item is null or item not between 0 and 30 then raise exception '아이템을 확인해 주세요.';end if;
+  if p_action='buy' and v_category<>'face' then
    if item=0 then raise exception '기본 캐릭터는 무료예요.';end if;
    if not exists(select 1 from vocab_game.catalog c where c.category=v_category and c.item_index=item and c.price=1000)then raise exception '판매 중인 아이템이 아니에요.';end if;
    if not exists(select 1 from vocab_game.owned o where o.key_hash=k and o.category=v_category and o.item_index=item)then
@@ -146,7 +153,7 @@ begin
     update vocab_game.wallets set balance=balance-1000,version=version+1 where key_hash=k;
    end if;
   end if;
-  if item<>0 and not exists(select 1 from vocab_game.owned o where o.key_hash=k and o.category=v_category and o.item_index=item)then raise exception '먼저 구매한 아이템을 골라 주세요.';end if;
+  if item<>0 and v_category<>'face' and not exists(select 1 from vocab_game.owned o where o.key_hash=k and o.category=v_category and o.item_index=item)then raise exception '먼저 구매한 아이템을 골라 주세요.';end if;
   update vocab_game.wallets set equipped=jsonb_set(equipped,array[v_category],to_jsonb(item)),version=version+1 where key_hash=k;
   return jsonb_build_object('wallet',vocab_game.snapshot(k));
  else raise exception '지원하지 않는 요청입니다.';

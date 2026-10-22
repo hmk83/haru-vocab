@@ -47,3 +47,6 @@ Only `public.vocab_game_action(text,jsonb)` is callable by the existing public-p
 Each game receives a UUID; answer replays return their stored outcome, contradictory replays and skipped positions are rejected. The payout is based on the server's completed-correct count, not a client-supplied score, and the stored Day best only increases. History reset does not remove wallets, owned items or Day bests. Purchases/equipment are checked server-side and serialized on the same wallet, so duplicate purchases do not charge twice and negative balances are rejected. Client snapshots include a monotonically increasing version to avoid showing an older response over a newer wallet.
 
 Production installation was verified on 2026-10-22: 1,000 academy words, 150 catalog items, six RLS-enabled tables, no anon USAGE on the private schema, no anon UPDATE on wallets, and the scoped RPC available with an empty search path. Full browser tests use fresh random profile keys; normal shared user balances are not seeded or reset.
+
+## 꾸미기 카테고리 확장
+기존 설치에는 `wardrobe-upgrade.sql`을 한 번 실행합니다. 카탈로그에 모자·안경·등·목·신발 각 30개를 추가하고 동일 프로필 RPC의 `face` 동작으로 눈/코/입을 독립 저장합니다. 포인트·구매·최고기록을 삭제하거나 초기화하지 않습니다. 표정은 서버에서도 무료이며 허용 부위와 범위를 검증합니다. 새 설치는 갱신된 `game-setup.sql`에 포함됩니다.

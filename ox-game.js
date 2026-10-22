@@ -37,13 +37,34 @@ window.VocabOX=(()=>{
   }catch(e){if(location.hash===oldHash)toast(e.message);}
   finally{launching=false;document.querySelectorAll('[data-mode="ox"]').forEach(b=>{b.disabled=false;b.textContent='O·X 게임';});}
  }
+ // Deterministic participants survive reloads without affecting server scoring.
+ function crowd(s){
+  const total=s.ids.length,seed=[...s.id].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0);
+  return Array.from({length:24},(_,id)=>{
+   const rank=(id+(seed%24))%24;
+   const fall=rank<2?total-1:Math.floor((rank-2)*Math.max(1,total-1)/22);
+   return {id,fall,hair:1+(id*7+seed)%30,skin:1+(id*3+seed)%30};
+  }).filter(n=>n.fall>=s.index);
+ }
+ function crowdSide(s,n,selected){return s.index===s.ids.length-1?!selected:(n.fall===s.index?!s.oxRounds[s.index].expected:s.oxRounds[s.index].expected);}
+ function crowdMarkup(s,answered,selected){
+  const participants=crowd(s),alive=answered?participants.filter(n=>crowdSide(s,n,selected)===s.oxRounds[s.index].expected).length:participants.length;
+  return `<span class="ox-crowd-count">컴퓨터 <b>${alive}</b>명 ${answered?'생존':'참가 중'}</span><div class="ox-crowd" aria-hidden="true">${participants.map((n,i)=>{
+   const side=crowdSide(s,n,selected),fall=answered&&side!==s.oxRounds[s.index].expected;
+   const x=answered?(side?24:76)+(i%6-2.5)*3.4:36+(i%6)*5.6;
+   return `<div class="ox-npc ${answered?(fall?'eliminated':'survived'):'waiting'}" data-npc="${n.id}" style="left:${x}%;bottom:${answered?20+Math.floor(i/6)*9:19+Math.floor(i/6)*11}%;--wander:${(i%2?1:-1)*(6+i%4)}px;--phase:-${i*.37}s"><span class="npc-number">${String(n.id+1).padStart(2,'0')}</span>${VocabStyle.avatar(cube,{hair:n.hair,skin:n.skin})}<span class="ox-shadow"></span></div>`;
+  }).join('')}</div>`;
+ }
+ function moveCrowd(s,selected){
+  crowd(s).forEach((n,i)=>{const el=app.querySelector(`[data-npc="${n.id}"]`);if(!el)return;el.classList.remove('waiting');el.classList.add('walking');el.style.left=((crowdSide(s,n,selected)?24:76)+(i%6-2.5)*3.4)+'%';el.style.bottom=(20+Math.floor(i/6)*9)+'%';});
+ }
  function render(s){
   cancel();document.body.className='ox-view';
   if(!available()){app.innerHTML=`<section class="ox-rotation"><span aria-hidden="true">↻</span><h1>넓은 가로 화면에서 열어줘</h1><p>O·X 게임은 PC·태블릿 가로 화면에서 할 수 있어.<br>진행한 문제는 그대로 남아 있어.</p><button data-action="leave-study">단어장으로</button></section>`;return;}
   if(!confirmed.has(s.id)){app.innerHTML='<section class="ox-service-error"><h1>저장된 게임을 확인하고 있어…</h1></section>';restore(s);return;}
   const r=s.oxRounds[s.index],w=WORDS.find(x=>x.id===r.id),meaning=WORDS.find(x=>x.id===r.meaningId),answered=s.chosen!==null;
   const correct=answered?s.answers.at(-1).correct:null,selected=s.chosen==='o';
-  app.innerHTML=`<section class="ox-game" aria-label="영어 O·X 게임"><div class="ox-topbar"><button class="ox-back" data-action="leave-study" aria-label="학습 나가기">←</button><div><span class="ox-eyebrow">O · X CHALLENGE</span><h1>${studyLabel(s)} <em>O·X 게임</em></h1></div><div class="ox-game-stats"><button class="ox-closet" data-open-wardrobe>꾸미기 <b data-wallet-balance>${VocabPoints.format(VocabPoints.wallet.balance)}P</b></button><span>${s.index+1}<small> / ${s.ids.length}</small></span><button data-ox-sound aria-label="${soundEnabled?'소리 끄기':'소리 켜기'}" aria-pressed="${!soundEnabled}">${soundEnabled?'♪':'♪̸'}</button></div></div><div class="ox-progress" role="progressbar" aria-label="진행" aria-valuenow="${s.index}" aria-valuemin="0" aria-valuemax="${s.ids.length}"><i style="width:${s.index/s.ids.length*100}%"></i></div><div class="ox-question"><span class="ox-question-label">단어와 뜻이 맞을까?</span><div class="ox-english" lang="en">${esc(w.en)}</div><div class="ox-meaning" lang="ko">${esc(meaning.ko)}</div></div><div class="ox-arena ${answered?'answered '+(correct?'win':'miss'):''}" data-ox-arena><div class="ox-cloud cloud-one"></div><div class="ox-cloud cloud-two"></div><div class="ox-horizon"></div><div class="ox-track"></div><button class="ox-platform ox-platform-o ${answered&&r.expected?'expected':''}" data-ox-choice="o" aria-label="O, 단어와 뜻이 맞아요" ${answered?'disabled':''}><span>O</span><small>맞아요</small></button><button class="ox-platform ox-platform-x ${answered&&!r.expected?'expected':''}" data-ox-choice="x" aria-label="X, 단어와 뜻이 달라요" ${answered?'disabled':''}><span>X</span><small>달라요</small></button><div class="ox-start-pad"></div><div class="ox-runner ${answered?(correct?'cheering':'falling'):''}" style="left:${answered?(selected?24:76):50}%" role="img" aria-label="나의 블록 캐릭터" data-ox-runner><span class="ox-me">나</span>${avatar()}<span class="ox-shadow"></span></div><div class="ox-particles" aria-hidden="true">${answered&&correct?sparkles():''}</div></div><div class="ox-bottom ${answered?'is-feedback '+(correct?'good':'bad'):''}" aria-live="polite">${answered?feedback(w,r,correct,s):'<span class="ox-touch-hint"><i aria-hidden="true">↔</i> O·X 발판을 누르거나 캐릭터를 끌어줘</span><span class="ox-hint-sub">맞으면 왼쪽 O · 다르면 오른쪽 X</span>'}</div></section>`;
+  app.innerHTML=`<section class="ox-game" aria-label="영어 O·X 게임"><div class="ox-topbar"><button class="ox-back" data-action="leave-study" aria-label="학습 나가기">←</button><div><span class="ox-eyebrow">O · X CHALLENGE</span><h1>${studyLabel(s)} <em>O·X 게임</em></h1></div><div class="ox-game-stats"><button class="ox-closet" data-open-wardrobe>꾸미기 <b data-wallet-balance>${VocabPoints.format(VocabPoints.wallet.balance)}P</b></button><span>${s.index+1}<small> / ${s.ids.length}</small></span><button data-ox-sound aria-label="${soundEnabled?'소리 끄기':'소리 켜기'}" aria-pressed="${!soundEnabled}">${soundEnabled?'♪':'♪̸'}</button></div></div><div class="ox-progress" role="progressbar" aria-label="진행" aria-valuenow="${s.index}" aria-valuemin="0" aria-valuemax="${s.ids.length}"><i style="width:${s.index/s.ids.length*100}%"></i></div><div class="ox-question"><span class="ox-question-label">단어와 뜻이 맞을까?</span><div class="ox-english" lang="en">${esc(w.en)}</div><div class="ox-meaning" lang="ko">${esc(meaning.ko)}</div></div><div class="ox-arena ${answered?'answered '+(correct?'win':'miss'):''}" data-ox-arena><div class="ox-cloud cloud-one"></div><div class="ox-cloud cloud-two"></div><div class="ox-horizon"></div><div class="ox-track"></div><button class="ox-platform ox-platform-o ${answered&&r.expected?'expected':''}" data-ox-choice="o" aria-label="O, 단어와 뜻이 맞아요" ${answered?'disabled':''}><span>O</span><small>맞아요</small></button><button class="ox-platform ox-platform-x ${answered&&!r.expected?'expected':''}" data-ox-choice="x" aria-label="X, 단어와 뜻이 달라요" ${answered?'disabled':''}><span>X</span><small>달라요</small></button><div class="ox-start-pad"></div>${crowdMarkup(s,answered,selected)}<div class="ox-runner ${answered?(correct?'cheering':'falling'):'waiting'}" style="left:${answered?(selected?24:76):50}%" role="img" aria-label="나의 블록 캐릭터" data-ox-runner><span class="ox-me">나</span>${avatar()}<span class="ox-shadow"></span></div><div class="ox-particles" aria-hidden="true">${answered&&correct?sparkles():''}</div></div><div class="ox-bottom ${answered?'is-feedback '+(correct?'good':'bad'):''}" aria-live="polite">${answered?feedback(w,r,correct,s):'<span class="ox-touch-hint"><i aria-hidden="true">↔</i> O·X 발판을 누르거나 캐릭터를 끌어줘</span><span class="ox-hint-sub">맞으면 왼쪽 O · 다르면 오른쪽 X</span>'}</div></section>`;
   bind(s);
  }
  function sparkles(){return Array.from({length:16},(_,i)=>`<i style="--angle:${i*22.5}deg;--delay:${i%3*.07}s;--spark-color:${['#f0b746','#46a790','#ec7f73','#88b3d4'][i%4]}"></i>`).join('');}
@@ -64,7 +85,7 @@ window.VocabOX=(()=>{
    rememberAnswer(s.ids[index],correct,false,false);draft();
    if(location.hash!=='#study'||!available())return;
    movementSound();const actor=app.querySelector('[data-ox-runner]');if(!actor){render(s);return;}
-   actor.classList.add('walking');actor.style.left=choice==='o'?'24%':'76%';
+   actor.classList.remove('waiting');actor.classList.add('walking');moveCrowd(s,choice==='o');actor.style.left=choice==='o'?'24%':'76%';
    const hint=app.querySelector('.ox-touch-hint');if(hint)hint.textContent='선택한 발판으로 이동 중…';
    function settle(){if(session?.id!==sessionId||session.index!==index||location.hash!=='#study')return;const dialog=document.querySelector('dialog[open]');if(dialog){dialog.addEventListener('close',()=>requestAnimationFrame(settle),{once:true});return;}render(s);if(!document.hidden)answerFeedback(correct);app.querySelector('[data-action="next"]')?.focus({preventScroll:true});}
    landingTimer=setTimeout(settle,reduced()?20:720);
@@ -87,5 +108,5 @@ window.VocabOX=(()=>{
  }
  document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key)||e.repeat||document.querySelector('dialog[open]')||location.hash!=='#study'||typeof session==='undefined'||session?.mode!=='ox')return;e.preventDefault();choose(e.key==='ArrowLeft'?'o':'x');});
  window.addEventListener('hashchange',cancel);
- return {available,render,cancel,cube,launch,adopt,result};
+ return {available,render,cancel,cube,launch,adopt,result,crowd,crowdSide};
 })();

@@ -1,12 +1,13 @@
 {
-  "time": "2026-10-22T02:00:36.577Z",
+  "time": "2026-10-22T03:00:06.203Z",
   "engine": "PGlite 0.5.11 (real PostgreSQL SQL; local isolated database)",
   "checks": [
     "Day best is a permanent high-water mark: 1,000→500→2,000; lowering and raising never restores the 100% award",
     "Duplicate answer requests and contradictory replays cannot mint points twice",
     "Server-ordered answers reject skipped questions and access through a different profile key",
     "Items cost exactly 1,000 server-side, repeat purchase is idempotent, and unowned/out-of-range equipment is rejected",
-    "Five categories have 30 paid items each; insufficient funds never produce a negative balance",
+    "Nine paid categories and legacy face presets have 30 items each; insufficient funds never produce a negative balance",
+    "Free eyes/nose/mouth and legacy facial presets never spend points; arbitrary wallet field edits are rejected",
     "Anonymous clients cannot read or modify the private wallet / best / ownership tables directly",
     "Exact requested example: 30 questions, 27 correct, fail question 28 = 1,000P",
     "Resetting learning history does not reset the Day best or re-enable first-time rewards"

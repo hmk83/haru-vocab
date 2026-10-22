@@ -20,11 +20,15 @@ try{
  pass('Server-ordered answers reject skipped questions and access through a different profile key');
  const firstPurchase=await rpc(code,'buy',{category:'hair',index:1,price:0}),afterBuy=Number(firstPurchase.wallet.balance);assert.equal(afterBuy,Number(balance)-1000);
  const duplicatePurchase=await rpc(code,'buy',{category:'hair',index:1});assert.equal(Number(duplicatePurchase.wallet.balance),afterBuy);
- assert.equal(duplicatePurchase.wallet.equipped.hair,1);await assert.rejects(rpc(code,'equip',{category:'face',index:30}));await assert.rejects(rpc(code,'buy',{category:'face',index:31}));
+ assert.equal(duplicatePurchase.wallet.equipped.hair,1);await assert.rejects(rpc(code,'equip',{category:'hat',index:30}));await assert.rejects(rpc(code,'buy',{category:'hat',index:31}));
  pass('Items cost exactly 1,000 server-side, repeat purchase is idempotent, and unowned/out-of-range equipment is rejected');
  const poor='c'.repeat(64);await assert.rejects(rpc(poor,'buy',{category:'skin',index:1}));assert.equal((await rpc(poor,'state')).wallet.balance,0);
- const cat=await db.query('select category,count(*)::int n,min(price)::int price from vocab_game.catalog group by category');assert.equal(cat.rows.length,5);assert(cat.rows.every(x=>x.n===30&&x.price===1000));
- pass('Five categories have 30 paid items each; insufficient funds never produce a negative balance');
+ const cat=await db.query('select category,count(*)::int n,min(price)::int price from vocab_game.catalog group by category');assert.equal(cat.rows.length,10);assert(cat.rows.every(x=>x.n===30&&x.price===1000));
+ pass('Nine paid categories and legacy face presets have 30 items each; insufficient funds never produce a negative balance');
+ for(const [part,index]of [['eyes',11],['nose',7],['mouth',11]]){const face=await rpc(poor,'face',{part,index});assert.equal(face.wallet.balance,0);assert.equal(face.wallet.equipped[part],index)}
+ await assert.rejects(rpc(poor,'face',{part:'nose',index:8}));await assert.rejects(rpc(poor,'face',{part:'balance',index:0}));
+ assert.equal((await rpc(poor,'buy',{category:'face',index:30})).wallet.balance,0);
+ pass('Free eyes/nose/mouth and legacy facial presets never spend points; arbitrary wallet field edits are rejected');
  await db.exec("set role anon");await assert.rejects(db.query('select * from vocab_game.wallets'));await db.exec('reset role');
  pass('Anonymous clients cannot read or modify the private wallet / best / ownership tables directly');
  await db.exec("insert into vocab_game.words(id,day,en,ko,distractors) select 1000+n,50,'QA '||n,'테스트 '||n,array[18,216] from generate_series(1,10)n");
