@@ -1,13 +1,13 @@
 {
   "base": "http://127.0.0.1:8873",
-  "time": "2026-10-22T03:09:52.912Z",
+  "time": "2026-10-22T04:24:17.969Z",
   "checks": [
     "Game/wardrobe entry appears on landscape tablets and PCs; phone and portrait study modes remain intact",
     "A Day uses all original words once, with a random order and balanced O/X; rotation preserves the same deck",
     "Native touch/drag, sound, correct feedback and falling work; 17 correct then fail question 18/20 grants exactly 1,000P and ends the run",
     "Reload / replay does not duplicate points or completed learning records",
     "Real Supabase rewards: 1,000 → 500 → 2,000 → 500 → 1,000; clear rewards 3,000 and the highest record never falls",
-    "All nine paid categories have 30 visually distinct options; buying each deducts exactly 1,000P and equips it, with comma-formatted numbers",
+    "All nine paid categories have distinct options including 48 hairstyles; buying each deducts exactly 500P and equips it, with comma-formatted numbers",
     "Repeat purchase cannot double-charge and unowned items cannot be equipped",
     "An independent browser reads the same points, all five equipped items and the scored O/X learning record from Supabase",
     "Purchased hair, skin, clothing, hand item and hat appear on the next game character",

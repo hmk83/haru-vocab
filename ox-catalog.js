@@ -42,6 +42,7 @@ window.VocabStyle=(()=>{
  const mouths=['작은 미소','활짝 웃음','차분한 입','놀란 입','장난 미소','치아 미소','고양이 입','씩 웃기','휘파람','혀 내밀기','하트 입','일자 입'];
  const faceParts=[{id:'eyes',name:'눈',names:eyes},{id:'nose',name:'코',names:noses},{id:'mouth',name:'입',names:mouths}];
  const items=categories.filter(c=>!c.free).flatMap(c=>Array.from({length:30},(_,i)=>({category:c.id,index:i+1,price:500,...(VocabLooks.catalog[c.id]?.[i]||{}),name:c.id==='hair'?hairShapes[Math.floor(i/6)]+' · '+bangs[i%6]:c.id==='skin'?'스킨 톤 '+String(i+1).padStart(2,'0'):c.id==='hand'?handNames[i]:VocabLooks.catalog[c.id][i].name})));
+ items.push(...VocabHair.items);
  const partIndex=(look,part)=>Number.isInteger(look[part])?look[part]:part==='eyes'?(look.face?((look.face-1)%6):0):part==='mouth'?(look.face?Math.floor((look.face-1)/6):0):0;
  function face(look={}){
   const e=partIndex(look,'eyes')%12,n=partIndex(look,'nose')%8,m=partIndex(look,'mouth')%12;
@@ -66,9 +67,11 @@ window.VocabStyle=(()=>{
  function avatar(cube,look={}){
   const hair=look.hair?look.hair-1:0,shape=Math.floor(hair/6),bang=hair%6,skinColor=look.skin?skin[look.skin-1]:'#ebbc91';
   const suit=VocabLooks.outfits[look.outfit-1],shirt=suit?.color||'#47937b';
+  const newHair=VocabHair.items.find(h=>h.index===look.hair);
   let extras='';if(shape===1)extras=cube('sidehair-a')+cube('sidehair-b');if(shape===2)extras=cube('ponytail');if(shape===3)extras=Array.from({length:4},(_,i)=>`<span class="ox-spike spike-${i}">${cube('spike')}</span>`).join('');if(shape===4)extras=cube('bun-a')+cube('bun-b');
+  if(newHair)extras=VocabHair.mesh(cube,newHair);
   const held=look.hand?`<span class="ox-held" aria-hidden="true"><svg viewBox="0 0 34 34">${icons[look.hand-1]}</svg></span>`:'';
-  return `<div class="ox-avatar ${look.hair?'':'base-hair'} hair-shape-${shape} bang-${bang} ${suit?'costume costume-'+suit.id:''} ${look.hat?'has-hat':''} ${look.shoes?'has-custom-shoes':''}" style="--avatar-skin:${skinColor};--avatar-shirt:${shirt};--suit-accent:${suit?.accent||'#f0cd65'};--suit-pants:${suit?.pants||'#415476'};--suit-boot:${suit?.boots||'#fff6dd'}"><div class="ox-rig">${cube('head',face(look))}${cube('hair')}${cube('fringe')}${extras}${cube('body',suit?VocabLooks.chest(suit):'<b class="ox-star">✦</b>')}<span class="ox-joint ox-arm a">${cube('sleeve')}${cube('hand')}</span><span class="ox-joint ox-arm b">${cube('sleeve')}${cube('hand')}${held}</span><span class="ox-joint ox-leg a">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span><span class="ox-joint ox-leg b">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span>${VocabLooks.details(cube,suit,look)}${VocabLooks.accessories(cube,look)}</div></div>`;
+  return `<div class="ox-avatar ${look.hair?'':'base-hair'} ${newHair?'extended-hair':''} hair-shape-${shape} bang-${bang} ${suit?'costume costume-'+suit.id:''} ${look.hat?'has-hat':''} ${look.shoes?'has-custom-shoes':''}" style="--avatar-skin:${skinColor};--avatar-shirt:${shirt};--suit-accent:${suit?.accent||'#f0cd65'};--suit-pants:${suit?.pants||'#415476'};--suit-boot:${suit?.boots||'#fff6dd'}"><div class="ox-rig">${cube('head',face(look))}${newHair?'':cube('hair')+cube('fringe')}${extras}${cube('body',suit?VocabLooks.chest(suit):'<b class="ox-star">✦</b>')}<span class="ox-joint ox-arm a">${cube('sleeve')}${cube('hand')}</span><span class="ox-joint ox-arm b">${cube('sleeve')}${cube('hand')}${held}</span><span class="ox-joint ox-leg a">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span><span class="ox-joint ox-leg b">${cube('pants')}${cube('shoe')}${VocabLooks.shoe(cube,look.shoes)}</span>${VocabLooks.details(cube,suit,look)}${VocabLooks.accessories(cube,look)}</div></div>`;
  }
  return {categories,items,avatar,face,faceParts,partIndex,icon:index=>`<svg viewBox="0 0 34 34" aria-hidden="true">${icons[index-1]||''}</svg>`};
 })();

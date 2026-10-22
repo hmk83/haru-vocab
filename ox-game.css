@@ -16,3 +16,31 @@
 @media(prefers-reduced-motion:reduce){.ox-npc.eliminated{opacity:.18}}
 
 .ox-back{display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+/* One cached SVG per opponent; movement stays on the compositor. */
+.ox-arena{container-type:size;background:#b8dbed;contain:layout paint}
+.ox-crowd .ox-npc{left:0!important;bottom:0!important;translate:calc(var(--npc-x)*1cqw) calc(var(--npc-y)*-1cqh);transition:translate .72s cubic-bezier(.3,.1,.2,1);will-change:translate;animation:none}
+.npc-sprite{display:block;width:74px;height:126px;user-select:none;pointer-events:none}
+.ox-npc.walking .npc-sprite{animation:npc-step .24s ease-in-out infinite alternate}
+.ox-npc.survived .npc-sprite{animation:npc-step .45s ease-in-out 2 alternate}
+.ox-crowd .ox-npc.eliminated{animation:npc-drop .9s ease-in forwards}
+@keyframes npc-step{to{transform:translateY(-5px) rotate(3deg)}}
+@keyframes npc-drop{to{transform:translateX(-50%) translateY(300px) rotate(20deg);opacity:0}}
+.voxel-world{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1;background:linear-gradient(#a3d2e7,#d9edd9)}
+.voxel-sun{position:absolute;right:20%;top:7%;width:36px;height:36px;background:#fff2be;box-shadow:0 0 0 9px #fff5cc35}
+.voxel-cloud{position:absolute;width:90px;height:17px;background:#f8fcf0;box-shadow:17px -15px 0 -2px #f8fcf0,42px -9px 0 0 #f8fcf0,10px 6px 0 #d5e7e6}
+.vc-one{left:14%;top:12%}.vc-two{right:9%;top:23%;scale:.7}
+.voxel-ridge{position:absolute;left:0;right:0;bottom:40%;height:48%;clip-path:polygon(0 45%,8% 45%,8% 20%,18% 20%,18% 0,28% 0,28% 30%,38% 30%,38% 55%,48% 55%,48% 15%,60% 15%,60% 35%,70% 35%,70% 5%,80% 5%,80% 30%,91% 30%,91% 45%,100% 45%,100% 100%,0 100%)}
+.ridge-back{background:#7caea1;opacity:.55}.ridge-front{bottom:34%;height:30%;background:#70a17b;transform:scaleX(-1);opacity:.9}
+.voxel-ground{position:absolute;inset:56% 0 0;background:repeating-linear-gradient(0deg,transparent 0 35px,#5e884c35 35px 37px),repeating-linear-gradient(90deg,#92b769 0 55px,#86ad60 55px 110px);border-top:12px solid #b2ca7e;box-shadow:0 -7px 0 #739a54}
+.voxel-tree{position:absolute;bottom:43%;width:13px;height:55px;background:#97704b;box-shadow:6px 0 #745738}
+.voxel-tree:before{content:'';position:absolute;width:70px;height:51px;background:#50875f;left:-28px;top:-28px;box-shadow:9px 7px #396d4e,inset 0 8px #74a26a}
+.voxel-tree:after{content:'';position:absolute;width:44px;height:22px;background:#65975e;left:-15px;top:-42px;box-shadow:8px 0 #4d804f}
+.tree-left{left:6%}.tree-right{right:6%;scale:.8}
+.voxel-stones{position:absolute;right:2%;bottom:5%;width:38px;height:18px;background:#99a6a1;box-shadow:-22px -12px #b7c0b3,8px 8px #758b83,-72px 13px #76975b}
+.ox-platform{border:0;border-radius:12px;background:#c9e3bd;box-shadow:0 9px 0 #53744e,0 15px 0 #765e42;color:#285e46;height:clamp(82px,16vh,130px)}
+.ox-platform-x{background:#efd0ac;box-shadow:0 9px 0 #b38966,0 15px 0 #765e42;color:#995f47}
+.ox-platform>span{position:absolute;left:9px;top:8px;font-size:36px;line-height:1;opacity:.9}
+.ox-platform.expected{box-shadow:0 9px 0 #53744e,0 15px 0 #765e42,inset 0 0 0 4px #fff8}
+.ox-arena.miss .ox-platform:not(.expected){box-shadow:0 9px 0 #927d66,0 15px 0 #765e42}
+@media(max-height:650px){.voxel-tree{scale:.65;bottom:42%}.voxel-sun{width:23px;height:23px}.ox-platform>span{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.ox-crowd .ox-npc{transition:none}.ox-npc .npc-sprite{animation:none!important}.ox-crowd .ox-npc.eliminated{animation:none;opacity:.18}}

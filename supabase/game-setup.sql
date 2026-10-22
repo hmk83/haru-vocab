@@ -10,7 +10,7 @@ create table if not exists vocab_game.words (
 );
 create table if not exists vocab_game.catalog (
  category text not null check(category in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes')),
- item_index integer not null check(item_index between 1 and 30),
+ item_index integer not null check(item_index between 1 and 48),
  price integer not null default 500 check(price=500),primary key(category,item_index)
 );
 alter table vocab_game.catalog drop constraint if exists catalog_category_check;
@@ -60,6 +60,8 @@ create or replace function vocab_game.run_view(r vocab_game.runs) returns jsonb 
   'total',jsonb_array_length(r.rounds),'startedAt',r.started_at,'finishedAt',r.finished_at);
 $$;
 revoke all on function vocab_game.snapshot(text),vocab_game.run_view(vocab_game.runs) from public,anon,authenticated;
+
+insert into vocab_game.catalog(category,item_index,price) select 'hair',n,500 from generate_series(31,48)n on conflict do nothing;
 
 create or replace function public.vocab_game_action(p_action text,p_payload jsonb default '{}') returns jsonb
 language plpgsql security definer set search_path='' as $$
@@ -143,7 +145,7 @@ begin
   return jsonb_build_object('wallet',vocab_game.snapshot(k));
  elsif p_action in ('buy','equip') then
   v_category:=p_payload->>'category';item:=(p_payload->>'index')::integer;
-  if v_category is null or v_category not in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes') or item is null or item not between 0 and 30 then raise exception '아이템을 확인해 주세요.';end if;
+  if v_category is null or v_category not in ('hair','skin','outfit','hand','face','hat','glasses','back','neck','shoes') or item is null or (item<0 or item>(case when v_category='hair' then 48 else 30 end)) then raise exception '아이템을 확인해 주세요.';end if;
   if p_action='buy' and v_category<>'face' then
    if item=0 then raise exception '기본 캐릭터는 무료예요.';end if;
    if not exists(select 1 from vocab_game.catalog c where c.category=v_category and c.item_index=item and c.price=500)then raise exception '판매 중인 아이템이 아니에요.';end if;

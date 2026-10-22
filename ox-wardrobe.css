@@ -20,3 +20,7 @@
 .has-custom-shoes .ox-leg>.ox-shoe{visibility:hidden}.costume-astronaut .ox-hand,.costume-robot .ox-hand,.costume-diver .ox-hand{--material:var(--suit-accent)}
 
 @media(max-height:500px) and (min-width:741px){.wardrobe-view main{height:auto;min-height:100dvh}.wardrobe-layout{min-height:600px}.wardrobe-preview{max-height:none}.shop-items{min-height:260px;max-height:420px}.shop-categories{position:sticky;top:0;z-index:5;background:#f4f3ee}}
+.hair-extension{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}.costume:has(.ox-hood-top,.ox-helmet-top) .hair-extension{visibility:hidden}.hair-piece .ox-new-hair{left:0;top:0}
+.shop-item{content-visibility:auto;contain-intrinsic-size:auto 222px}
+@media(max-width:1050px){.shop-item{contain-intrinsic-size:auto 200px}}
+@media(max-width:740px){.shop-item{contain-intrinsic-size:auto 188px}}

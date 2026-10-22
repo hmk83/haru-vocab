@@ -1,0 +1,11 @@
+{
+  "base": "http://127.0.0.1:8873",
+  "npc": 24,
+  "npcNodes": 2784,
+  "sceneNodes": 2900,
+  "renderMedianMs": 65,
+  "frameP95Ms": 100.10000000000036,
+  "framesOver50ms": 41,
+  "frameCount": 56,
+  "cpuThrottle": 4
+}
