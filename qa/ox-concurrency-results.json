@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-22T02:23:41.499Z",
+  "engine": "Live Supabase PostgreSQL RPC",
+  "isolatedRandomProfile": true,
+  "checks": [
+    "Concurrent equal Day records grant 1,000P + 500P, never two 100% rewards",
+    "Two simultaneous 1,000P purchases from 1,500P allow only one purchase and retain a 500P balance",
+    "Concurrent duplicate purchases of an owned item do not charge again"
+  ]
+}

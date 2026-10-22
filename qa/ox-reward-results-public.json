@@ -1,6 +1,6 @@
 {
   "base": "https://hmk83.github.io/haru-vocab",
-  "time": "2026-10-22T02:19:58.952Z",
+  "time": "2026-10-22T02:24:44.439Z",
   "checks": [
     "Game/wardrobe entry appears only on a landscape touch tablet; existing phone/portrait/desktop modes remain intact",
     "A Day uses all original words once, with a random order and balanced O/X; rotation preserves the same deck",

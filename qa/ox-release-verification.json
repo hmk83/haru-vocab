@@ -1,0 +1,47 @@
+{
+  "time": "2026-10-22T02:23:58.603Z",
+  "sourceCommit": "2f881ed901cb8676c58f4b4681b368d316bf359b",
+  "pagesRun": "https://github.com/hmk83/haru-vocab/actions/runs/39710984252",
+  "assets": [
+    {
+      "name": "index.html",
+      "sha256": "9589270283ed9da018a1b15b43da6ddcfa872b74cb8f4e5d42092103b8c43c62",
+      "matchesLocal": true
+    },
+    {
+      "name": "app.js",
+      "sha256": "fe64f86804433b4e709a6009ed779b9ba56097939a48968afdab04ad1abd4d11",
+      "matchesLocal": true
+    },
+    {
+      "name": "ox-game.js",
+      "sha256": "55f9db90f71407e37521f2219ad3f74fa7928ad7006e8e901b8dfeda7ec60125",
+      "matchesLocal": true
+    },
+    {
+      "name": "ox-game.css",
+      "sha256": "71c70394f2a90bc45e2c8edc83495a5bf2b181273974aa744379e8ca89c90077",
+      "matchesLocal": true
+    },
+    {
+      "name": "ox-catalog.js",
+      "sha256": "5b2001e077904bc9c014923cfc9471d864d30f1423a492ee6352eb5361e0e0be",
+      "matchesLocal": true
+    },
+    {
+      "name": "ox-points.js",
+      "sha256": "e0be6c4561f25988dd9dc3574cebad52ac369cd955ee4dcdb797231c9d659f2c",
+      "matchesLocal": true
+    },
+    {
+      "name": "ox-wardrobe.css",
+      "sha256": "6a162e2d5f7a1cd3eacfd7de6a072e0ee344024b5f05d0dc7a063ef11d9db789",
+      "matchesLocal": true
+    },
+    {
+      "name": "data.js",
+      "sha256": "ec9966d9492ba552080bae55ba7a3e2dd10aae6993ff2246b035f92178068ee1",
+      "matchesLocal": true
+    }
+  ]
+}
